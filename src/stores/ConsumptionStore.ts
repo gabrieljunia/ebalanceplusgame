@@ -140,7 +140,7 @@ export interface Consumption {
     equipment: Equipment;
 }
 
-interface ConsumptionCurve {
+export interface ConsumptionCurve {
     consumption: Map<number, number>;
     peak: number;
     peakIndex: number;

@@ -2,13 +2,14 @@
     import { useEquipmentStore } from '../stores/EquipmentStore';
     import { useConsumptionStore } from '../stores/ConsumptionStore';
     import { Icon } from '@iconify/vue';
+    import Slider from './Slider.vue';
     import CardPopupHeader from './CardPopupHeader.vue';
     import CardPopupContent from './CardPopupContent.vue';
 </script>
 
 <template>
     <section id="board-consumption-add" class="popup-window">
-        <div class="color-banner" :style="{'background-color':equipment.type.color}"/>
+        <div class="color-banner" :style="{'background-color':equipment.type.color}"></div>
         <div class="card">
             <CardPopupHeader
                 :equipment-icon="equipment.type.icon_name"
@@ -33,6 +34,10 @@
                     </div>
                 </div>
             </div>
+            <Slider 
+            :times="{timeStart: startHour, timeEnd:endHour}"
+            :consumption-amount="equipment.consumption"
+            />
             <div class="card-save-modification">
                 <button class="btn btn-save" @click="saveConsumption">
                     <Icon icon="mdi:content-save" class="btn-icon"/>
@@ -62,7 +67,8 @@
             CardPopupContent
         },
         props: {
-            equipment: {} as any
+            equipment: {} as any,
+
         },
         data() {
             return {
@@ -113,6 +119,7 @@
                 },
                 immediate: true
             }
-        }
+        },
+        
     }
 </script>

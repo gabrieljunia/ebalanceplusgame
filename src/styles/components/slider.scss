@@ -1,0 +1,30 @@
+.slider-container {
+    align-content: center;
+    border-radius: 15px;
+    height: 3rem;
+    width: 42.8rem;
+    display: flex;
+
+
+}
+
+.inside-slider {
+    display: flex;
+    flex-direction: row;
+
+    .display-overlay {
+        z-index: 2000;
+        position: absolute;
+        //background-color: aquamarine;
+        height: 3rem;
+        width: 0.45rem;
+    }
+
+    .color-index {
+        // position: absolute;
+        width:0.45rem;
+        height: 3rem;
+        
+    }
+}
+
