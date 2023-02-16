@@ -10,6 +10,7 @@ import { useEnergyStore } from '../stores/EnergyStore';
 import AddConsumptionWindow from '../components/AddConsumptionWindow.vue';
 import BoardConsumptionDetails from '../components/BoardConsumptionDetails.vue';
 import EnergyAddEnergyWindow from '../components/EnergyAddEnergyWindow.vue';
+import SaleEnergyWindow from '../components/SaleEnergyWindow.vue';
 const consumptionStore = useConsumptionStore();
 const boardStore = useBoardStore();
 const gameParametersStore = useGameParametersStore();
@@ -32,6 +33,7 @@ consumptionStore.addInitialConsumptionToConsumptionList();
         </div>
         <GameBoardSnackBar />
         <EnergyAddEnergyWindow v-if="energyStore.clickedStoreEnergy"/>
+        <SaleEnergyWindow v-if="energyStore.clickedSaleMarket"/>
         <div class="board-list-container">
             <EquipementList />
             <Board
