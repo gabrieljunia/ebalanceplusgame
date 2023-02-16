@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     PurchaseSaleMenu: typeof import('./components/PurchaseSaleMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SaleEnergyWindow: typeof import('./components/SaleEnergyWindow.vue')['default']
     ScenarioList: typeof import('./components/ScenarioList.vue')['default']
     ScenarioResume: typeof import('./components/ScenarioResume.vue')['default']
     SetupValidationSection: typeof import('./components/SetupValidationSection.vue')['default']

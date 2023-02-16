@@ -18,6 +18,7 @@ export const useEnergyStore = defineStore({
             clickedConsumeEnergy: false as boolean,
             storedEnergyList: [] as Consumption[],
             clickedMarketIcon: false as boolean, 
+            clickedSaleMarket: false as boolean,
         };
     },
     actions: {
@@ -59,7 +60,10 @@ export const useEnergyStore = defineStore({
         },
         clickOnMarketIcon() {
             this.clickedMarketIcon = this.clickedMarketIcon ? false : true;
-        }
+        },
+        clickOnSaleMarket() {
+            this.clickedSaleMarket = this.clickedSaleMarket ? false : true;
+        },
     },
     getters: {
         getEnergyIcon() {
