@@ -7,6 +7,7 @@
     import CardPopupAmountModifier from './CardPopupAmountModifier.vue';
     import CardPopupTimeModifier from './CardPopupTimeModifier.vue';
     import CardPopupSaveButtons from './CardPopupSaveButtons.vue';
+import CardPopupCost from './CardPopupCost.vue';
 </script>
 
 
@@ -27,11 +28,27 @@
             :is-cost="false"/>
             <CardPopupAmountModifier
             :amount="amount"
-            :max-amount="maxAmount"
+            :max-amount="equipment.equipmentConsumptionParams.maxConsumption"
             :min-amount="equipment.equipmentConsumptionParams.minConsumption"
             :step-amount="equipment.equipmentConsumptionParams.step"
             @amount="(value) => updateConsumptionAmount(value)"/>
-            
+            <CardPopupCost
+            :times="{timeStart:startHour, timeEnd: endHour}"
+            :price='200'/>
+            <CardPopupTimeModifier
+            :start-hour="startHour"
+            :end-hour="endHour"
+            :max-duration="equipment.type.equipmentTypeDurationParams.maxDuration"
+            :min-duration="equipment.type.equipmentTypeDurationParams.minDuration"
+            :step-duration="equipment.type.equipmentTypeDurationParams.step"
+            :original-duration="equipment.type.equipmentTypeDurationParams.originalDuration"
+            :is-duration-length-editable="equipment.type.equipmentTypeDurationParams.isDurationLengthEditable"
+            :input-error="inputError"
+            @start-hour="(value) => updateStartHour(value)"
+            @end-hour="(value) => updateEndHour(value)"/>
+            <CardPopupSaveButtons
+            @save="saveConsumption"
+            @cancel="closePopup"/>
         </div>
     </section>
 
@@ -42,12 +59,13 @@
     export default {
         name: "SaleEnergyWindow", 
         components: {
-            CardPopupHeader,
-            CardPopupContent,
-            CardPopupAmountModifier,
-            CardPopupTimeModifier,
-            CardPopupSaveButtons,
-        }, 
+    CardPopupHeader,
+    CardPopupContent,
+    CardPopupAmountModifier,
+    CardPopupTimeModifier,
+    CardPopupSaveButtons,
+    CardPopupCost
+}, 
         data() {
             return {
                 energyStore: useEnergyStore(),
@@ -58,7 +76,7 @@
                 endHour: '00:15' as string,
                 startIndex: 0 as number,
                 endIndex: 0 as number,
-                maxAmount: 10 as number,
+                maxAmount: 3000 as number,
                 amount: 0 as number,
                 price: 0,
                 equipment: {
@@ -75,6 +93,7 @@
                         isBattery: false,
                         equipmentTypeDurationParams:{
                             isDurationEditable: true,
+                            isDurationLengthEditable: true,
                             originalDuration: "00:15",
                             step: "00:15",
                             minDuration: "00:15",
@@ -92,11 +111,12 @@
                     equipmentConsumptionParams:{
                         originalConsumption: 0,
                         isConsumptionEditable: true,
-                        step: 10,
+                        step: 50,
                         minConsumption: 0,
                         maxConsumption: 3000
                     },
                 } as Equipment,
+                indexes: {} as Object,
             }
         },
         methods: {
@@ -106,7 +126,54 @@
             updateConsumptionAmount(newConsumption:number) {
                 this.amount=newConsumption;
             },
+            updateStartHour(newStartHour:string) {
+                this.startHour=newStartHour;
+                this.setStartAndEndIndex();
+                this.updateMaxAmount();
+            },
+            updateEndHour(newEndHour:string) {
+                this.endHour=newEndHour;
+                this.setStartAndEndIndex();
+                this.updateMaxAmount();
+            },
+            setStartAndEndIndex() {
+                const indexes = this.consumptionStore.convertTimesToIndexes(this.startHour, this.endHour);
+                this.startIndex = indexes.indexStart;
+                this.endIndex = indexes.indexEnd;
+            },
+            updateMaxAmount() {
+                this.maxAmount=(this.energyStore.maxEnergy-this.energyStore.storedEnergy)/((this.endIndex-this.startIndex)+1)
+            },
+            checkAmountIsUnderMax() {
+                if(this.amount>this.maxAmount) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            saveConsumption() {
+                if(this.consumptionStore.checkTimeInput(this.startHour, this.endHour)) {
+                    this.inputError=false;
+                    if (this.checkAmountIsUnderMax()) {
+                        this.consumptionStore.addConsumption(this.startIndex, this.endIndex, this.equipment, this.amount, this.price);
+                        this.energyStore.clickOnSaleMarket();
+                    }
+                } else {
+                    this.inputError=true;
+                }
+            },
+            getRandomEquipmentIdString() {
+                return Math.random().toString(36).substr(2, 9);
+            },
+            getIndexes(){
+                this.indexes = this.consumptionStore.convertIndexesToTimes(this.startHour, this.endHour)
+            }
+            
 
+        },
+        mounted() {
+            this.updateMaxAmount();
+            this.equipment.id=this.getRandomEquipmentIdString();
         }
     }
 </script>
