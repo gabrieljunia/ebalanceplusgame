@@ -26,7 +26,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style  lang="scss">
     @import '../styles/components/cardPopupContent.scss';
 </style>
 
