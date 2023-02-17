@@ -3,7 +3,6 @@ import { Scenario, ScenarioLocale, InternatObject } from '../types/Scenario';
 import { EquipmentType, EquipmentTypeLocale } from '../types/EquipmentType';
 import { Consumption } from '../types/Consumption';
 
-
 export const useScenarioStore = defineStore({ id: "ScenarioStore", 
     state: () => {
         return {
@@ -39,7 +38,14 @@ export const useScenarioStore = defineStore({ id: "ScenarioStore",
                     numberOfBatteries: 0,
                     batteryIndividualCapacity: 0,
                     batteryPrice: 0
-                }
+                }, 
+                energyMarketParameters: {
+                    normalPrice: 0,
+                    initialPricesList: []
+                },
+                moneyParameters: {
+                    initialMoney: 0
+                },
             }] as Scenario[],
             scenariosLocale: [] as ScenarioLocale[],
             clickedScenario: null as null | ScenarioLocale
@@ -118,7 +124,9 @@ export const useScenarioStore = defineStore({ id: "ScenarioStore",
                                                     description: description,
                                                     equipment_type_local: listEquipmentLocale,
                                                     initial_consumption: scenario.initial_consumption,
-                                                    energyStorageParameters: scenario.energyStorageParameters
+                                                    energyStorageParameters: scenario.energyStorageParameters,
+                                                    energyMarketParameters: scenario.energyMarketParameters,
+                                                    moneyParameters: scenario.moneyParameters
                                                 }; 
             return scenarioLocale;
         },

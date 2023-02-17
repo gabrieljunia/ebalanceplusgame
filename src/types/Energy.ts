@@ -5,3 +5,8 @@ export interface EnergyStorageParameters {
     batteryIndividualCapacity: number;
     batteryPrice: number;
 }
+
+export interface EnergyMarketParameters {
+    normalPrice: number,
+    initialPricesList: number[],
+}

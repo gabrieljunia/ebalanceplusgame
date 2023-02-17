@@ -7,7 +7,7 @@
     import CardPopupAmountModifier from './CardPopupAmountModifier.vue';
     import CardPopupTimeModifier from './CardPopupTimeModifier.vue';
     import CardPopupSaveButtons from './CardPopupSaveButtons.vue';
-import CardPopupCost from './CardPopupCost.vue';
+    import CardPopupCost from './CardPopupCost.vue';
 </script>
 
 
@@ -31,10 +31,11 @@ import CardPopupCost from './CardPopupCost.vue';
             :max-amount="equipment.equipmentConsumptionParams.maxConsumption"
             :min-amount="equipment.equipmentConsumptionParams.minConsumption"
             :step-amount="equipment.equipmentConsumptionParams.step"
-            @amount="(value) => updateConsumptionAmount(value)"/>
+            @amount="(value) => updateConsumptionAmount(value)" 
+            i18n-key="input.consumption"/>
             <CardPopupCost
             :times="{timeStart:startHour, timeEnd: endHour}"
-            :price='200'/>
+            :price='getPrice()'/>
             <CardPopupTimeModifier
             :start-hour="startHour"
             :end-hour="endHour"
@@ -59,15 +60,16 @@ import CardPopupCost from './CardPopupCost.vue';
     export default {
         name: "SaleEnergyWindow", 
         components: {
-    CardPopupHeader,
-    CardPopupContent,
-    CardPopupAmountModifier,
-    CardPopupTimeModifier,
-    CardPopupSaveButtons,
-    CardPopupCost
-}, 
+            CardPopupHeader,
+            CardPopupContent,
+            CardPopupAmountModifier,
+            CardPopupTimeModifier,
+            CardPopupSaveButtons,
+            CardPopupCost
+        }, 
         data() {
             return {
+                moneyStore: useMoneyStore(),
                 energyStore: useEnergyStore(),
                 consumptionStore: useConsumptionStore(),
                 type: this.$t("market.saleConsumption"),
@@ -165,11 +167,15 @@ import CardPopupCost from './CardPopupCost.vue';
             getRandomEquipmentIdString() {
                 return Math.random().toString(36).substr(2, 9);
             },
-            getIndexes(){
-                this.indexes = this.consumptionStore.convertIndexesToTimes(this.startHour, this.endHour)
+            getPrice() {
+                this.price = this.moneyStore.getTotalPrice(this.equipment.equipmentConsumptionParams.step, this.amount,this.startIndex, this.endIndex);
+                return this.price
             }
-            
-
+        },
+        computed : {
+            getInitialMonet() {
+                this.moneyStore.getInitialMoney;
+            }
         },
         mounted() {
             this.updateMaxAmount();
