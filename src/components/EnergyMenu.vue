@@ -3,9 +3,9 @@ import { useEnergyStore } from '../stores/EnergyStore';
 </script>
 
 <template>
-    <section id="energy-menu">
-        <div class="energy-menu-header">
-            <span class="energy-stored-percentage" :style="{'color' : energyStore.getEnergyIconColor}">
+    <section id="menu">
+        <div class="menu-header">
+            <span class="stored-percentage" :style="{'color' : energyStore.getEnergyIconColor}">
                 {{ energyStore.getEnergyStoragePercentage }} %
             </span>
             <h2 class="title">
@@ -13,7 +13,7 @@ import { useEnergyStore } from '../stores/EnergyStore';
             </h2>
             <span class="closebtn" @click="energyStore.clickOnEnergyIcon()">&times;</span>
         </div>
-        <div class="energy-menu-figures">
+        <div class="menu-figures">
             <div class="figure">
                 <p class="text">{{ $t("energy.stored") }} :</p>
                 <h3 class="text">{{energyStore.storedEnergy}} W</h3>
@@ -23,11 +23,11 @@ import { useEnergyStore } from '../stores/EnergyStore';
                 <h3 class="text">{{energyStore.maxEnergy}} W</h3>
             </div>
         </div>
-        <div class="energy-menu-buttons">
+        <div class="menu-buttons">
             <button @click="energyStore.clickOnStoreEnergy" class="btn">{{ $t("button.store") }}</button>
             <button @click="energyStore.clickOnConsumeEnergy" class="btn">{{ $t("button.use") }}</button>
         </div>
-        <div class="energy-menu-batteries">
+        <div class="menu-batteries">
             <h3 class="title">{{ $t("energy.batteriesManagement") }}</h3>
             <div class="figures-container">
                 <div class="figure">
@@ -59,7 +59,7 @@ import { useEnergyStore } from '../stores/EnergyStore';
 </template>
 
 <style lang="scss">
-    @import "../styles/components/energyMenu.scss";
+    @import "../styles/components/energyAndMarketMenu.scss";
 </style>
 
 <script lang="ts">

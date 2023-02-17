@@ -22,13 +22,18 @@
         "buy": "Buy",
         "sell": "Sell",
         "create": "Create",
-        "join": "Join"
+        "join": "Join",
+        "purchase": "Purchase",
+        "sale": "Sale",
+        "total": "Total"
+
     },
     "input":{
         "start": "Start",
         "end": "End",
         "amount": "Amount",
-        "consumption": "Consumption"
+        "consumption": "Consumption",
+        "cost": "Cost"
     },
     "alert":{
         "overConsumption": "Your demand is higher than your production. You will have to buy energy !"
@@ -60,5 +65,9 @@
     "setup":{
         "launchNewGame": "Launch a new game",
         "setupExplanation": "Setup your game by choosing the scenario and the production curve. To do so, you just have to click on the productions curves and scenarios on the sides. A description of the scenario and the production curve will be displayed above. You can also click on random."
+    },
+    "market": {
+        "header": "bot"
+
     }
 }

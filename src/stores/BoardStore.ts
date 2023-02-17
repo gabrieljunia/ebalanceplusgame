@@ -105,7 +105,7 @@ export const useBoardStore = defineStore({
                 y: y - ((consumption.amount/10) * this.tileParams.pxSizeFor10W),
                 width: ((endIndex - startIndex)+1) * this.tileParams.pxSizeFor15min,
                 height: (consumption.amount/10) * this.tileParams.pxSizeFor10W,
-                color: consumption.color
+                color: consumption.equipment.type.color,
             } as Tile;
         },
         // TODO : define method to sort tiles (according to size on x-axis ?

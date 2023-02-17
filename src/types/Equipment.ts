@@ -1,23 +1,34 @@
 import { EquipmentType, EquipmentTypeLocale } from './EquipmentType';
 
 export interface Equipment{
-    id: number,
+    id: string,
+    energy_class: string,
     type: EquipmentType,
-    energy_class: string, 
-    consumption: number,
-    points: number,
-    price: number,
-    point_gap: number[],
-    price_gap: number[];
+    equipmentCostParams: EquipmentCostParams,
+    equipmentConsumptionParams: EquipmentConsumptionParams
 }
 
 export interface EquipmentLocale{
-    id: number,
+    id: string,
     type: EquipmentTypeLocale,
     energy_class: string,
-    consumption: number,
-    points: number,
-    price: number,
-    point_gap: number[],
-    price_gap: number[]
+    equipmentCostParams: EquipmentCostParams,
+    equipmentConsumptionParams: EquipmentConsumptionParams
+}
+
+export interface EquipmentCostParams{
+    originalPrice: number,
+    hasCost: boolean,
+    isCostEditable: boolean,
+    step: number,
+    minCost: number,
+    maxCost: number
+}
+
+export interface EquipmentConsumptionParams{
+    originalConsumption: number,
+    isConsumptionEditable: boolean,
+    step: number,
+    minConsumption: number,
+    maxConsumption: number
 }

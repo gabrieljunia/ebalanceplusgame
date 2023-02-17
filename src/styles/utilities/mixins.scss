@@ -40,7 +40,6 @@
         }
     }
 }
-
 @mixin button-link-style-main(){
     a{
         text-decoration: none;
@@ -51,4 +50,41 @@
             color: var(--theme-color-text);
         }
     }
+}
+@mixin button-plus-minus-style() {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: 0.2s;
+    background-color: var(--theme-color-background);
+    color: var(--theme-color-text);
+    &:hover {
+        background-color: var(--theme-color-primary);
+        color: var(--theme-color-text-secondary);
+    }
+}
+@mixin button-disabled-style($textColor, $backgroundColor) {
+    background-color: var($backgroundColor);
+    color: var($textColor);
+    cursor: not-allowed;
+    &:hover {
+        background-color: var($backgroundColor);
+        color: var($textColor);
+    }
+}
+
+@mixin base-typography() {
+    font-size: var(--theme-font-size);
+    font-weight: var(--theme-font-weight);
+    color: var(--theme-color-text);
+}
+
+@mixin base-typography-title() {
+    font-size: var(--theme-font-size-title);
+    font-weight: var(--theme-font-weight-title);
+    color: var(--theme-color-text);
 }

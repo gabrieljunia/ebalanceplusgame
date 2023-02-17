@@ -6,7 +6,8 @@ export const useEquipmentStore = defineStore({id :'EquipmentStore',
     state: () => {
         return {
             equipments: [{
-                id: 0,
+                id: '0',
+                energy_class: '',
                 type:{
                     id:'0',
                     names: 
@@ -14,15 +15,31 @@ export const useEquipmentStore = defineStore({id :'EquipmentStore',
                     {lang: 'en',name: 'Empty'}],
                     icon_name:'vide',
                     color: '#000000',
-                    isConsumptionEditable: false,
-                    hasCost: true
+                    isBattery: false,
+                    equipmentTypeDurationParams: {
+                        isDurationEditable: true,
+                        isDurationLengthEditable: true,
+                        originalDuration: '00:15',
+                        step: '00:15',
+                        minDuration: '00:15',
+                        maxDuration: '23:45'
+                    },
                 },
-                energy_class: '',
-                consumption: 0,
-                points: 0,
-                price: 0,
-                point_gap: [0,0],
-                price_gap: [0,0]
+                equipmentCostParams: {
+                    originalPrice: 0,
+                    hasCost: false,
+                    isCostEditable: false,
+                    step: 0,
+                    minCost: 0,
+                    maxCost: 0
+                },
+                equipmentConsumptionParams: {
+                    originalConsumption: 0,
+                    isConsumptionEditable: false,
+                    step: 0,
+                    minConsumption: 0,
+                    maxConsumption: 0
+                },
             }] as Equipment [],
             clickedEquipment: null as null | Equipment
         };
@@ -43,8 +60,8 @@ export const useEquipmentStore = defineStore({id :'EquipmentStore',
                         name: name.name,
                         icon_name: type.icon_name,
                         color: type.color,
-                        isConsumptionEditable: type.isConsumptionEditable,
-                        hasCost: type.hasCost
+                        isBattery: type.isBattery,
+                        equipmentTypeDurationParams: type.equipmentTypeDurationParams
                     } as EquipmentTypeLocale;
                 }
             }
@@ -53,8 +70,8 @@ export const useEquipmentStore = defineStore({id :'EquipmentStore',
                 name: type.names[0].name,
                 icon_name: type.icon_name,
                 color: type.color,
-                isConsumptionEditable: type.isConsumptionEditable,
-                hasCost: type.hasCost
+                isBattery: type.isBattery,
+                equipmentTypeDurationParams: type.equipmentTypeDurationParams
             } as EquipmentTypeLocale;
         },
         getListOfEquipmentTypesLocale() {
@@ -72,18 +89,15 @@ export const useEquipmentStore = defineStore({id :'EquipmentStore',
             const equipmentTypeLocale = this.getEquipmentTypeLocale(equipment.type, locale);
             return {
                 id: equipment.id,
-                type: equipmentTypeLocale,
                 energy_class: equipment.energy_class,
-                consumption: equipment.consumption,
-                points: equipment.points,
-                price: equipment.price,
-                point_gap: equipment.point_gap,
-                price_gap: equipment.price_gap
+                type: equipmentTypeLocale,
+                equipmentCostParams: equipment.equipmentCostParams,
+                equipmentConsumptionParams: equipment.equipmentConsumptionParams
             } as EquipmentLocale;
         }
     },
     getters: {
-        getEquipmentById:(state) => (id: number) => {
+        getEquipmentById:(state) => (id: string) => {
             return state.equipments.find(equipment => equipment.id === id);
         },
         getEquipmentByTypeId:(state) => (id:string) => {

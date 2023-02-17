@@ -1,20 +1,22 @@
+@import '../utilities/mixins.scss';
 .card-content{
     margin: 15px 0 15px 0;
     h2{
         display: flex;
         align-items: center;
-        font-size: larger;
-        color: var(--theme-color-text);
+        @include base-typography;
         svg{
             height: 30px;
             width: 30px;
         }
     }
     align-items: center;
-    .card-content-consumption{
+    .card-content-item{
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .card-content-consumption{
         margin: 0 0 5px 0;
         .consumption-amount{
             .icon-consumption{
@@ -22,8 +24,13 @@
                 color: rgba(255, 217, 0, 0.605);
             }
         }
-        .money-amount{
-            margin-left: 10px;
+        .consumption-amount-Wh{
+            margin-left: 1rem;
+        }
+    }
+    .card-content-price{
+        margin: 0 0 5px 0;
+        .consumption-price{
             .icon-price{
                 margin-right: 10px;
                 color: green;
@@ -31,9 +38,6 @@
         }
     }
     .card-content-time{
-        display: flex;
-        justify-content: center;
-        align-items: center;
         .icon-time{
             margin-right: 10px;
             color:blue;

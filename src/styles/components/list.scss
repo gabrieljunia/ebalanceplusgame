@@ -1,10 +1,11 @@
 .list-equipment {
-	position: absolute;
+	position: fixed;
 	display: flex;
+	height: 90%;
 	flex-direction: column;
-	overflow: hidden;
 	background-color: var(--theme-color-secondary);
 	border-radius: 15px;
+	margin-left: 0.2rem;
 	.icon-container {
 		display: flex;
 		align-items: center;
@@ -24,14 +25,11 @@
 		justify-content: center;
 	}
 	.type-list-normal {
-		//width: calc(11rem + 32px);
-		height: 1520px;
-		padding: 1rem;
+		padding: 0.5rem;
 		margin-top: 0.4rem;
 		transition: 0.2s ease-in-out;
 		overflow-y: auto;
-		.boucle {			
-			margin: 0 0.5rem 0.5rem 0;
+		.boucle {
 			background-color: var(--theme-color-background-secondary);
 			border-radius: 10px;
 			.type-container {
@@ -45,7 +43,6 @@
 				color: var(--theme-color-text);
 				.material-icons {
 					font-size: 2.5rem;
-					//color: var();
 					transition: 0.2s ease-in-out;
 				}
 				h1 {
@@ -58,16 +55,19 @@
 				}
 			}
 			.equipment-container{
-				padding-bottom: 10px;
+				padding-bottom: 0.2rem;
+				margin-bottom: 0.2rem;
 			}
 		}
 
 	}
 	.type-list-reduce {
-		width: calc(4rem + 20px );
-		height: 1520px;
-		padding: 1rem;
-		margin-top: 0.4rem;
+		width: calc(3rem + 20px );
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 0.5rem;
 		transition: 0.2s ease-in-out;
 		overflow-y: auto;
 		.boucle {

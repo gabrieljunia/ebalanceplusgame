@@ -3,8 +3,8 @@ export interface EquipmentType{
     names: EquipmentTypeName[],
     icon_name: string,
     color: string,
-    isConsumptionEditable: boolean,
-    hasCost: boolean
+    isBattery: boolean,
+    equipmentTypeDurationParams: EquipmentTypeDurationParams,
 }
 
 export interface EquipmentTypeLocale{
@@ -12,11 +12,20 @@ export interface EquipmentTypeLocale{
     name: string,
     icon_name: string,
     color: string,
-    isConsumptionEditable: boolean,
-    hasCost: boolean
+    isBattery: boolean,
+    equipmentTypeDurationParams: EquipmentTypeDurationParams
 }
 
 export interface EquipmentTypeName{
     lang: string,
     name: string
+}
+
+export interface EquipmentTypeDurationParams{
+    isDurationEditable: boolean,
+    isDurationLengthEditable: boolean,
+    originalDuration: string,
+    step: string,
+    minDuration: string,
+    maxDuration: string
 }

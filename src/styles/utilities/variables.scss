@@ -46,7 +46,14 @@ $color-red-A95D5B-300:#9A5351;
 $color-red-A95D5B-400:#894A48;
 $color-red-A95D5B-500:#78413F;
 
-
+/*--Fonts Definition--*/
+$font-family-roboto: 'Roboto', sans-serif;
+$font-size-1: 1.2rem;
+$font-size-2: 1.4rem;
+$font-size-3: 1.6rem;
+$font-size-4: 1.8rem;
+$font-size-5: 2rem;
+$font-weight-bold: bold;
 
 /*--Themes variables Definition--*/
 $theme-color-primary:--theme-color-primary;
@@ -59,6 +66,13 @@ $theme-color-background-secondary:--theme-color-background-secondary;
 $theme-color-text:--theme-color-text;
 $theme-color-text-secondary:--theme-color-text-secondary;
 $theme-color-btn-close:--theme-color-btn-close;
+$theme-color-error:--theme-color-error;
+
+$theme-font-family: --theme-font-family;
+$theme-font-size: --theme-font-size;
+$theme-font-weight: --theme-font-weight;
+$theme-font-size-title: --theme-font-size-title;
+$theme-font-weight-title: --theme-font-weight-title;
 
 /*--Themes Definition--*/
 $theme-map-light: (
@@ -71,7 +85,13 @@ $theme-map-light: (
     $theme-color-background-secondary: $color-white-100,
     $theme-color-text: $color-black-200,
     $theme-color-text-secondary: $color-white-200,
-    $theme-color-btn-close: $color-red-7D0A00-50
+    $theme-color-btn-close: $color-red-7D0A00-50,
+    $theme-color-error: $color-red-7D0A00-50,
+    $theme-font-family: $font-family-roboto,
+    $theme-font-size: $font-size-1,
+    $theme-font-weight: $font-weight-bold,
+    $theme-font-size-title: $font-size-3,
+    $theme-font-weight-title: $font-weight-bold
 );
 
 $theme-map-dark: (
@@ -84,5 +104,11 @@ $theme-map-dark: (
     $theme-color-background-secondary: $color-black-50,
     $theme-color-text: $color-white-200,
     $theme-color-text-secondary: $color-black-200,
-    $theme-color-btn-close: $color-red-7D0A00-50
+    $theme-color-btn-close: $color-red-7D0A00-50,
+    $theme-color-error: $color-red-7D0A00-50,
+    $theme-font-family: $font-family-roboto,
+    $theme-font-size: $font-size-1,
+    $theme-font-weight: $font-weight-bold,
+    $theme-font-size-title: $font-size-3,
+    $theme-font-weight-title: $font-weight-bold
 )

@@ -5,7 +5,7 @@ export interface Consumption {
     startIndex: number;
     endIndex: number;
     amount: number;
-    color: string;
+    price: number;
     equipment: Equipment;
 }
 

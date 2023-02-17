@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     HomeCreateGame: typeof import('./components/HomeCreateGame.vue')['default']
     LanguageSelector: typeof import('./components/LanguageSelector.vue')['default']
+    MarketMenu: typeof import('./components/MarketMenu.vue')['default']
     ProductionList: typeof import('./components/ProductionList.vue')['default']
     ProductionResume: typeof import('./components/ProductionResume.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -33,66 +33,34 @@
                 "id":"dishwasher",
                 "names":[{"name":"Lave-vaisselle","lang":"fr"},{"name":"Dishwasher","lang":"en"}],
                 "icon_name":"mdi:dishwasher",
-                "color":"#9A7751"
+                "color":"#9A7751",
+                "isBattery": false,
+                "equipmentTypeDurationParams": {
+                    "isDurationEditable": true,
+                    "isDurationLengthEditable": true,
+                    "originalDuration": "00:15",
+                    "step": "00:15",
+                    "minDuration": "00:15",
+                    "maxDuration": "23:45"
+                }
             },
             {
                 "id":"washingMachine",
                 "names":[{"name":"Machine à laver","lang":"fr"},{"name":"Washing-machine","lang":"en"}],
                 "icon_name":"mdi:washing-machine",
-                "color":"#00447C"
+                "color":"#00447C",
+                "isBattery": false,
+                "equipmentTypeDurationParams": {
+                    "isDurationEditable": true,
+                    "isDurationLengthEditable": true,
+                    "originalDuration": "00:15",
+                    "step": "00:15",
+                    "minDuration": "00:15",
+                    "maxDuration": "23:45"
+                }
             }
         ],
         "initial_consumption": [
-            {
-                "id":"0",
-                "startIndex": 24,
-                "endIndex": 32,
-                "amount": 1300,
-                "color": "#9A7751",
-                "equipment": 
-                {
-                    "id":0,
-                    "type":{
-                        "id":"dishwasher",
-                        "names":[{"name":"Lave-vaisselle","lang":"fr"},{"name":"Dishwasher","lang":"en"}],
-                        "icon_name":"mdi:dishwasher",
-                        "color":"#9A7751",
-                        "isConsumptionEditable": false,
-                        "hasCost": true
-                    },
-                    "energy_class": "A",
-                    "consumption": 1300,
-                    "points": 500,
-                    "price": 500,
-                    "point_gap": [0,10], 
-                    "price_gap": [0,10]
-                }
-            }, 
-            {
-                "id":"1",
-                "startIndex": 36,
-                "endIndex": 44,
-                "amount": 1300,
-                "color": "#9A7751",
-                "equipment": 
-                {
-                    "id":12,
-                    "type":{
-                        "id":"washingMachine",
-                        "names":[{"name":"Machine à laver","lang":"fr"},{"name":"Washing-machine","lang":"en"}],
-                        "icon_name":"mdi:washing-machine",
-                        "color":"#00447C",
-                        "isConsumptionEditable": false,
-                        "hasCost": true
-                    },
-                    "energy_class": "F",
-                    "consumption": 2200,
-                    "points": 50,
-                    "price": 50,
-                    "point_gap": [0,10], 
-                    "price_gap": [0,10]
-                }
-            }
         ]
     }
 ]

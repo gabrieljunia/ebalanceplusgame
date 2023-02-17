@@ -1,14 +1,15 @@
 @import '../utilities/mixins.scss';
-.card-time-modifier{
+.card-amount-modifier {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     @include base-typography;
-    .hour-container{
+    .amount-container {
+        margin: 0.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        .hour-modifier-container{
+        .amount-modifier-container{
             background-color: var(--theme-color-background-secondary);
             border-radius: 25px;
             margin: 0.5rem;
@@ -32,30 +33,25 @@
                 //padding: 0.5rem 1.2rem;
             }
             .disabled{
-                @include button-disabled-style(--theme-color-text, --theme-color-background-secondary);
+                @include button-disabled-style(--theme-color-text, --theme-color-background-secondary)
             }
-            .input-container{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .input{
-                    height: 2rem;
-                    border: none;
-                    border-radius: 25px;
-                    background-color: var(--theme-color-background-secondary);
-                    text-align: center;
-                    &:focus{
-                        outline: none;
-                    }
+            .amount-input {
+                height: 2rem;
+                width: 6rem;
+                margin-left: 1.2rem;
+                border: none;
+                border-radius: 25px;
+                background-color: var(--theme-color-background-secondary);
+                text-align: center;
+                &:focus{
+                    outline: none;
                 }
             }
         }
         .input-error{
             border: 1px solid var(--theme-color-error);
-            .input-container{
-                .input{
-                    color: var(--theme-color-error);
-                }
+            .amount-input{
+                color: var(--theme-color-error);
             }
         }
     }

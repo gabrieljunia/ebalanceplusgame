@@ -22,13 +22,17 @@
         "buy": "Acheter",
         "sell": "Vendre",
         "create": "Créer",
-        "join": "Rejoindre"
+        "join": "Rejoindre",
+        "purchase":"achat",
+        "sale": "vente",
+        "total": "Total"
     },
     "input":{
         "start": "Début",
         "end": "Fin",
         "amount": "Montant",
-        "consumption": "Consommation"
+        "consumption": "Consommation",
+        "cost": "Coût"
     },
     "alert":{
         "overConsumption": "Votre demande est supérieure à la production !"
@@ -60,5 +64,9 @@
     "setup":{
         "launchNewGame": "Lancer une nouvelle partie",
         "setupExplanation": "Choisissez le scénario de votre partie et l'allure de votre courbe de production. Pour faire cela, il vous suffit de cliquer sur la courbe et le scénario qui vous intéresse a gauche et a droite. Une description plus détaillée sera affichée ci-dessus. Vous pouvez également choisir le mode aléatoire."
+    },
+    "market": {
+        "header": "pnj"
+
     }
 }

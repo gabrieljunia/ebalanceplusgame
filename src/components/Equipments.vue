@@ -19,8 +19,8 @@
 <template>
     <div class="equi-container" @click="isClicked(equipment)">
         <div class="conso-class " :class="equipment.energy_class">{{ equipment.energy_class }}</div>
-        <h1 class="name">{{ equipment.consumption }} W</h1>
-        <p class="price">{{ equipment.price }} €</p>
+        <h1 class="name">{{ equipment.equipmentConsumptionParams.originalConsumption }} W</h1>
+        <p class="price">{{ equipment.equipmentCostParams.originalPrice }} €</p>
     </div>
 
 </template>
