@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 // import { ProductionCurve } from "../types/Production";
-import { Scenario, ScenarioLocale } from "../types/Scenario";
+import { ScenarioLocale } from "../types/Scenario";
 
 export const useMoneyStore = defineStore({
     id: 'MoneyStore',

@@ -3,6 +3,7 @@ import { useProductionStore } from './ProductionStore';
 import i18n from '../modules/i18n';
 import { ScenarioLocale } from '../types/Scenario';
 import { ProductionCurve } from '../types/Production';
+import { Consumption } from '../types/Consumption';
 
 export const useGameParametersStore = defineStore({
     id: 'GameParametersStore',
@@ -22,13 +23,20 @@ export const useGameParametersStore = defineStore({
                 color: '',
                 description: '',
                 equipment_type_local: [],
-                initial_consumption: [],
+                initial_consumption: [{}] as Consumption[],
                 energyStorageParameters: {
                     isEnergyStorage: false,
                     initialStoredEnergy: 0,
                     numberOfBatteries: 0,
                     batteryIndividualCapacity: 0,
                     batteryPrice: 0
+                }, 
+                energyMarketParameters: {
+                    normalPrice: 0,
+                    initialPricesList: []
+                },
+                moneyParameters: {
+                    initialMoney: 0
                 }
             } as ScenarioLocale,
             productionCurve: {
@@ -88,6 +96,13 @@ export const useGameParametersStore = defineStore({
                         numberOfBatteries: 0,
                         batteryIndividualCapacity: 0,
                         batteryPrice: 0
+                    },
+                    energyMarketParameters: {
+                        normalPrice: 0,
+                        initialPricesList: []
+                    },
+                    moneyParameters: {
+                        initialMoney: 0
                     }
                 };
             }
