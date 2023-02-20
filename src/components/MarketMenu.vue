@@ -6,8 +6,8 @@ import { useEnergyStore } from '../stores/EnergyStore';
         
     <section id="menu" v-if="energyStore.clickedMarketIcon">
         <div class="menu-header" >
-            <span class="stored-percentage" :style="{'color' : energyStore.getEnergyIconColor}">
-                {{ energyStore.getEnergyStoragePercentage }} %
+            <span class="stored-percentage">
+                {{ moneyStore.money }} $
             </span>
             <h2 class="title">
                 {{ $t("market.header") }}
@@ -36,8 +36,20 @@ import { useEnergyStore } from '../stores/EnergyStore';
 
 <script lang="ts">
     const energyStore = useEnergyStore();
+    const scenarioStore = useScenarioStore();
+    const moneyStore = useMoneyStore();
     export default {
-        name: "PurchaseSaleMenu"
+        name: "PurchaseSaleMenu",
+        methods:{
+            getInitialMoney(){
+                const clickedScenario = scenarioStore.clickedScenario
+                let initialMoney: number = 0;
+                if(clickedScenario){
+                    initialMoney = clickedScenario.moneyParameters.initialMoney;
+                }
+                return initialMoney;
+            }
+        }
     }
 </script>
 

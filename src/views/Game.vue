@@ -17,6 +17,7 @@ const gameParametersStore = useGameParametersStore();
 const equipmentStore = useEquipmentStore();
 const energyStore = useEnergyStore();
 consumptionStore.addInitialConsumptionToConsumptionList();
+useMoneyStore().getInitialMoney();
 </script>
 
 <template>

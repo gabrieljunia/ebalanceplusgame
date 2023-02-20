@@ -16,6 +16,7 @@
         <div class="color-banner" :style="{backgroundColor: equipment.type.color}"></div>
 
         <div class="card">
+
             <CardPopupHeader 
             :equipment-icon="equipment.type.icon_name"
             :equipment-color="equipment.type.color"
@@ -25,14 +26,18 @@
             :consumption-amount="amount"
             :equipment-price="price"
             :times="{timeStart:startHour, timeEnd:endHour}"
-            :is-cost="false"/>
+            :is-cost="false"/>            
+            <div class="money">
+                {{ moneyStore.money }} $
+            </div>
             <CardPopupAmountModifier
             :amount="amount"
             :max-amount="equipment.equipmentConsumptionParams.maxConsumption"
             :min-amount="equipment.equipmentConsumptionParams.minConsumption"
             :step-amount="equipment.equipmentConsumptionParams.step"
             @amount="(value) => updateConsumptionAmount(value)" 
-            i18n-key="input.consumption"/>
+            i18n-key="input.consumption"/>            
+
             <CardPopupCost
             :times="{timeStart:startHour, timeEnd: endHour}"
             :price='getPrice()'/>
@@ -72,13 +77,14 @@
                 moneyStore: useMoneyStore(),
                 energyStore: useEnergyStore(),
                 consumptionStore: useConsumptionStore(),
+                scenarioStore: useScenarioStore(),
                 type: this.$t("market.saleConsumption"),
                 inputError: false as boolean,
                 startHour: '00:00' as string,
                 endHour: '00:15' as string,
                 startIndex: 0 as number,
                 endIndex: 0 as number,
-                maxAmount: 3000 as number,
+                maxAmount: 10000 as number,
                 amount: 0 as number,
                 price: 0,
                 equipment: {
@@ -108,14 +114,14 @@
                         isCostEditable: false,
                         step: 0,
                         minCost: 0,
-                        maxCost: 0
+                        maxCost: 100000
                     },
                     equipmentConsumptionParams:{
                         originalConsumption: 0,
                         isConsumptionEditable: true,
                         step: 50,
                         minConsumption: 0,
-                        maxConsumption: 3000
+                        maxConsumption: 10000
                     },
                 } as Equipment,
                 indexes: {} as Object,
@@ -159,11 +165,16 @@
                     if (this.checkAmountIsUnderMax()) {
                         this.consumptionStore.addConsumption(this.startIndex, this.endIndex, this.equipment, this.amount, this.price);
                         this.energyStore.clickOnSaleMarket();
+                        this.addMoney();
                     }
                 } else {
                     this.inputError=true;
                 }
             },
+            addMoney() {
+                const newPrice: number = this.getPrice();
+                this.moneyStore.addMoney(newPrice);
+            }, 
             getRandomEquipmentIdString() {
                 return Math.random().toString(36).substr(2, 9);
             },
@@ -186,5 +197,5 @@
 
 
 <style scoped lang="scss">
-
+    @import '../styles/components/saleEnergyWindow.scss';
 </style>

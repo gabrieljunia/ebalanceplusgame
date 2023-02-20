@@ -14,7 +14,7 @@ export const useMoneyStore = defineStore({
     actions: {
 
         addMoney(newMoney: number) {
-            this.money =+ newMoney;
+            this.money = this.money + newMoney;
         },
         takeMoney(offMoney: number) {
             this.money =- offMoney;
@@ -38,6 +38,11 @@ export const useMoneyStore = defineStore({
                 return 0;
             }
         },
+        getMoney(){
+            const clickedScenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
+            if(clickedScenario)
+                this.money = clickedScenario.moneyParameters.initialMoney;
+        }
     },
     getters: {
         getInitialMoney:(state)=> () => {
@@ -51,6 +56,3 @@ export const useMoneyStore = defineStore({
         }
     },
 })
-
-
-
