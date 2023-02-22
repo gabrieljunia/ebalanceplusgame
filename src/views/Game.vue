@@ -11,6 +11,7 @@ import { useBoardStore } from '../stores/BoardStore';
 import { useEquipmentStore } from '../stores/EquipmentStore';
 import { useEnergyStore } from '../stores/EnergyStore';
 import EnergyMenuUseEnergyWindow from '../components/EnergyMenuUseEnergyWindow.vue';
+import MarketMenuSaleWindow from '../components/MarketMenuSaleWindow.vue';
 const consumptionStore = useConsumptionStore();
 const boardStore = useBoardStore();
 const gameParametersStore = useGameParametersStore();
@@ -37,6 +38,7 @@ energyStore.getBatteryEquipmentTypes()
         <BoardSnackBar />
         <EnergyMenuAddEnergyWindow v-if="energyStore.clickedStoreEnergy"/>
         <EnergyMenuUseEnergyWindow v-if="energyStore.clickedConsumeEnergy"/>
+        <MarketMenuSaleWindow v-if="energyStore.clickedSaleMarket"/>
         <div class="board-list-container">
             <EquipmentList />
             <Board

@@ -27,9 +27,8 @@ import { useEnergyStore } from '../stores/EnergyStore';
         </div>
         <div class="menu-buttons">
             <button class="btn">{{ $t("button.purchase") }}</button>
-            <button class="btn"> {{ $t("button.sale") }}</button>
+            <button class="btn" @click="energyStore.clickOnSaleMarket()"> {{ $t("button.sale") }}</button>
         </div>
-
 
     </section>
 </template>

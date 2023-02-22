@@ -73,6 +73,13 @@
             "batteryPrice": 10,
             "batteryChargeEquipmentTypeId": "battery_charge",
             "batteryDischargeEquipmentTypeId": "battery_discharge"
+        },
+        "energyMarketParameters": {
+            "normalPrice": 6,
+            "initialPricesList": [5, 9, 5, 5, 1, 7, 4, 9, 2, 4, 2, 8, 8, 7, 3, 0, 7, 8, 7, 5, 5, 3, 4, 8, 9, 5, 4, 7, 8, 6, 4, 0, 7, 9, 9, 2, 3, 8, 4, 6, 0, 2, 2, 4, 9, 3, 7, 5, 8, 3, 3, 9, 7, 6, 3, 8, 7, 9, 0, 6, 2, 2, 7, 3, 3, 0, 8, 6, 5, 8, 5, 9, 4, 6, 6, 1, 7, 9, 0, 6, 4, 9, 5, 5, 6, 1, 8, 4, 1, 9, 2, 5, 1, 7, 9, 2]
+        }, 
+        "moneyParameter": {
+            "initialMoney": 200
         }
     }
 ]

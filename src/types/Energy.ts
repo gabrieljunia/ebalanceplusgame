@@ -7,3 +7,7 @@ export interface EnergyStorageParameters {
     batteryChargeEquipmentTypeId: string;
     batteryDischargeEquipmentTypeId: string;
 }
+export interface EnergyMarketParameters {
+    normalPrice: number,
+    initialPricesList: number[],
+}
