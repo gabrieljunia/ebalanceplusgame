@@ -77,8 +77,8 @@
         "setupExplanation": "Setup your game by choosing the scenario and the production curve. To do so, you just have to click on the productions curves and scenarios on the sides. A description of the scenario and the production curve will be displayed above. You can also click on random."
     },
     "market": {
-        "header": "bot"
-
+        "header": "bot",
+        "saleConsumption": "Sell energy"
     },
     "rule": {
         "title": "E-Balance game - Rule",
