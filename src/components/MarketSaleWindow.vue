@@ -13,7 +13,7 @@ import { generateStringId } from '../helpers/idGenerator';
         :type="type"
         :props-amount="amount"
         :props-max-energy-amount="maxAmount"
-        :props-price="moneyStore.priceOfConsumption"
+        :props-price="getPrice()"
         :equipment="equipment"
         :indexes="{start:startIndex,end:endIndex}"
         :props-is-initial-add-popup="true"

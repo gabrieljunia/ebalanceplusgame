@@ -18,6 +18,13 @@ export const useMoneyStore = defineStore({
                 this.money = scenario.moneyParameters.initialMoney;
             }
         },
+        setInitialPrice() {
+            const scenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
+            if(scenario) {
+                this.pricesList = scenario.energyMarketParameters.salePricesList;
+                this.priceConstant = scenario.energyMarketParameters.constantPrice;
+            }
+        },
         addMoney(moneyToAdd: number) {
             this.money = this.money + moneyToAdd;
         },
