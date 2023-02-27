@@ -13,7 +13,7 @@ import { generateStringId } from '../helpers/idGenerator';
         :type="type"
         :props-amount="amount"
         :props-max-energy-amount="maxAmount"
-        :props-price="getPrice()"
+        :props-price="moneyStore.priceOfConsumption"
         :equipment="equipment"
         :indexes="{start:startIndex,end:endIndex}"
         :props-is-initial-add-popup="true"
@@ -104,8 +104,8 @@ import { generateStringId } from '../helpers/idGenerator';
             },
 
             getPrice() {
-                this.price = this.moneyStore.getPriceInsideIndexes(this.startIndex, this.endIndex, this.amount, this.equipment.equipmentConsumptionParams.step );
-                return this.price;
+                return this.moneyStore.getPriceInsideIndexes(this.startIndex, this.endIndex, this.amount, this.equipment.equipmentConsumptionParams.step );
+                
             }
         },
         mounted() {
