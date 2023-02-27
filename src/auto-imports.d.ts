@@ -69,6 +69,7 @@ declare global {
   const useGameParametersStore: typeof import('./stores/GameParametersStore')['useGameParametersStore']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useLink: typeof import('vue-router')['useLink']
+  const useMoneyStore: typeof import('./stores/MoneyStore')['useMoneyStore']
   const useProductionStore: typeof import('./stores/ProductionStore')['useProductionStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']

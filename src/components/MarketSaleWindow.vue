@@ -104,8 +104,8 @@ import { generateStringId } from '../helpers/idGenerator';
             },
 
             getPrice() {
-                this.price = this.moneyStore.getPriceInsideIndexes(this.startIndex, this.endIndex, this.amount, this.equipment.equipmentConsumptionParams.step );
-                return this.price;
+                return this.moneyStore.getPriceInsideIndexes(this.startIndex, this.endIndex, this.amount, this.equipment.equipmentConsumptionParams.step );
+                
             }
         },
         mounted() {
