@@ -52,7 +52,7 @@
             initiateGamePage(){
                 this.consumptionStore.addInitialConsumptionToConsumptionList();
                 this.energyStore.getBatteryEquipmentTypes()
-                this.moneyStore.setInitialMoney();
+                this.moneyStore.setInitialMoneyAndPriceOfEnergy();
                 this.gameParametersStore.isGameStarted = true;
             }
         }

@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     EquipmentList: typeof import('./components/EquipmentList.vue')['default']
     EquipmentListEquipment: typeof import('./components/EquipmentListEquipment.vue')['default']
     HomeCreateGame: typeof import('./components/HomeCreateGame.vue')['default']
+    MarketBuyWindow: typeof import('./components/MarketBuyWindow.vue')['default']
     MarketMenu: typeof import('./components/MarketMenu.vue')['default']
     MarketSaleWindow: typeof import('./components/MarketSaleWindow.vue')['default']
     MoneyInterface: typeof import('./components/MoneyInterface.vue')['default']

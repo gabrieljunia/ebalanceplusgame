@@ -78,7 +78,8 @@
     },
     "market": {
         "header": "pnj",
-        "saleConsumption": "Vendre de l'énergie"
+        "saleConsumption": "Vendre de l'énergie",
+        "purchase" : "Achat d'énergie"
     },
     "rule": {
         "title": "Jeu E-Balance - régle du jeu",

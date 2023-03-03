@@ -12,19 +12,15 @@ export const useMoneyStore = defineStore({
         };
     },
     actions: {
-        setInitialMoney(){
+        setInitialMoneyAndPriceOfEnergy() {
             const scenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
             if(scenario) {
                 this.money = scenario.moneyParameters.initialMoney;
-            }
-        },
-        setInitialPrice() {
-            const scenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
-            if(scenario) {
                 this.pricesList = scenario.energyMarketParameters.salePricesList;
-                this.priceConstant = scenario.energyMarketParameters.constantPrice;
             }
         },
+        
+       
         addMoney(moneyToAdd: number) {
             this.money = this.money + moneyToAdd;
         },
@@ -38,17 +34,76 @@ export const useMoneyStore = defineStore({
             if(this.checkIfMoneyCanBeTakeOff(moneyToTakeOff))
                 this.money = this.money - moneyToTakeOff;
             else
-                console.log("error"); //TODO make a real error message
+                console.log("error"); // TODO make a real error message
         },
-        getPriceInsideIndexes(startIndex: number, endIndex: number, amount: number, step: number) {
-            let totalPrice: number = 0;
+        // getPriceInsideIndexes(startIndex: number, endIndex: number, amount: number, step: number) {
+        //     let totalPrice: number = 0;
+        //     const multiplier: number = amount/step;
+        //     for(let i=startIndex; i<endIndex; i++) {
+        //         totalPrice += this.pricesList[i];
+        //     }
+        //     this.priceOfConsumption = totalPrice*multiplier;
+        //     return this.priceOfConsumption;   
+        // },
+        // getPriceInsideIndexes(startIndex: number, endIndex: number, amount: number, step: number){
+        //     let totalPrice: number = 0;
+        //     const multiplier: number = amount/step;
+        //     const price: number | number[] | undefined = this.getTypePrice();
+        //     for(let i=startIndex; i<endIndex; i++) {
+        //         if(typeof price == "number" ){
+        //             totalPrice += price;
+        //         }
+        //         else {
+        //             totalPrice += this.pricesList[i];
+        //         }
+        //         this.priceOfConsumption = totalPrice*multiplier;
+        //         return this.priceOfConsumption;
+        //     }
+        // },
+        // getTypePriceInClickedScenario(){
+        //     const scenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
+        //     if(scenario != null) {
+        //         if(scenario.energyMarketParameters.constantPrice == 0) {
+        //             return scenario.energyMarketParameters.salePricesList;
+        //         } else if( scenario.energyMarketParameters.salePricesList.length == 0) {
+        //             return scenario.energyMarketParameters.constantPrice;
+        //         }
+        //     } else if( scenario == null) {
+        //         return 0 ;
+        //     }
+        // }
+
+        getTotalPrice(step: number, amount: number, startIndex: number, endIndex: number){
+            const priceInside: number = this.getPriceInsideIndex(startIndex, endIndex);
             const multiplier: number = amount/step;
-            for(let i=startIndex; i<endIndex; i++) {
-                totalPrice += this.pricesList[i];
+            this.priceOfConsumption =  priceInside*multiplier;
+            console.log("cons price " + this.priceOfConsumption);
+        },
+
+        getPriceInsideIndex(startIndex: number, endIndex: number) {
+            const scenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
+            if(scenario){
+                const pricesList: number[] = scenario.energyMarketParameters.salePricesList;
+                let totalPrice: number = 0;
+                for( let i=startIndex; i<endIndex; i++) {
+                    totalPrice += pricesList[i];
+                }
+                console.log("total price " + totalPrice);
+                return totalPrice;
+            } else {
+                return 0;
             }
-            this.priceOfConsumption = totalPrice*multiplier;
-            return this.priceOfConsumption;   
+        },
+        getMoney(){
+            const clickedScenario: ScenarioLocale | null = useScenarioStore().clickedScenario;
+            if(clickedScenario)
+                this.money = clickedScenario.moneyParameters.initialMoney;
         }
+
+
+
+
+
     }, 
     getters: {
         

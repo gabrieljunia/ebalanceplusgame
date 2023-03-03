@@ -78,7 +78,8 @@
     },
     "market": {
         "header": "bot",
-        "saleConsumption": "Sell energy"
+        "saleConsumption": "Sell energy",
+        "purchase" : "Purchase energy"
     },
     "rule": {
         "title": "E-Balance game - Rule",

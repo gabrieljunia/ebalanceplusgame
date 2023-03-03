@@ -2,7 +2,7 @@
     import { useMoneyStore } from '../stores/MoneyStore';
     // import { useScenarioStore } from '../stores/ScenarioStore';
     const moneyStore = useMoneyStore();
-    moneyStore.setInitialMoney();
+    moneyStore.setInitialMoneyAndPriceOfEnergy();
 </script>
 
 <template>

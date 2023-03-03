@@ -13,6 +13,7 @@ import { useEnergyStore } from '../stores/EnergyStore';
 import EnergyMenuUseEnergyWindow from '../components/EnergyMenuUseEnergyWindow.vue';
 import MoneyInterface from '../components/MoneyInterface.vue';
 import MarketSaleWindow from '../components/MarketSaleWindow.vue';
+import MarketBuyWindow from '../components/MarketBuyWindow.vue';
 const consumptionStore = useConsumptionStore();
 const boardStore = useBoardStore();
 const gameParametersStore = useGameParametersStore();
@@ -39,6 +40,7 @@ const energyStore = useEnergyStore();
         <EnergyMenuAddEnergyWindow v-if="energyStore.clickedStoreEnergy"/>
         <EnergyMenuUseEnergyWindow v-if="energyStore.clickedConsumeEnergy"/>
         <MarketSaleWindow v-if="energyStore.clickedMarketSaleEnergy"/>
+        <MarketBuyWindow v-if="energyStore.clickedMarketBuyEnergy"/>
         <MoneyInterface/>
         <div class="board-list-container">
             <EquipmentList />

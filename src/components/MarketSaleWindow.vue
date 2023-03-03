@@ -4,6 +4,9 @@ import { Equipment } from '../types/Equipment';
 import CardPopup from './CardPopup.vue';
 import { generateStringId } from '../helpers/idGenerator';
 
+
+
+
 </script>
 
 <template>
@@ -51,7 +54,7 @@ import { generateStringId } from '../helpers/idGenerator';
                     energy_class: '',
                     type: {
                         id: "999", //todo add the create ID 
-                        names : [{name: "vente d'énergie", lang: "fr"}, {name: "energy sale", lang: "en"}],
+                        names : [{text: "vente d'énergie", lang: "fr"}, {text: "energy sale", lang: "en"}],
                         icon_name: "mdi:cash-usd",
                         color: "#233536",
                         isBattery: false,
@@ -98,15 +101,16 @@ import { generateStringId } from '../helpers/idGenerator';
             timeError() {
                 alert(this.$t('error.timeError'));
             },
-
             addMoney() {
-                this.moneyStore.addMoney(this.getPrice())
+                const newPrice: number = this.getPrice();
+                this.moneyStore.addMoney(newPrice);
             },
-
             getPrice() {
-                return this.moneyStore.getPriceInsideIndexes(this.startIndex, this.endIndex, this.amount, this.equipment.equipmentConsumptionParams.step );
                 
+                this.price = this.moneyStore.priceOfConsumption;
+                return this.price;
             }
+
         },
         mounted() {
             this.equipment.id = generateStringId();

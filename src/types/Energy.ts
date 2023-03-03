@@ -16,6 +16,5 @@ export interface EnergyStorageParameters {
 
 
 export interface EnergyMarketParameters {
-    salePricesList: number[],
-    constantPrice: number
+    salePricesList: number[];
 }
