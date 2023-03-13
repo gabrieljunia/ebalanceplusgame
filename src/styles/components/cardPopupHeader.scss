@@ -12,23 +12,6 @@
         @include base-typography-title;
     }
     .closebtn{
-        background-color: red;
-        height:22px;
-        width: 22px;
-        border-radius: 50%;
-        margin-left: 15px;
-        color: black;
-        font-weight: bold;
-        float: right;
-        font-size: 22px;
-        cursor: pointer;
-        transition: 0.3s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .closebtn:hover{
-        color: white;
-        background-color: darkred;
+        @include button-close-style;
     }
 }

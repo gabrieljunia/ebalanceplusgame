@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Scenario, ScenarioLocale} from '../types/Scenario';
 import { EquipmentType, EquipmentTypeLocale } from '../types/EquipmentType';
 import { errorScenario, errorScenarioLocale } from '../assets/entityErrorScenario';
+import { convertI18nObjectToLocale } from '../helpers/translation';
 
 
 export const useScenarioStore = defineStore({ id: "ScenarioStore", 
@@ -27,50 +28,30 @@ export const useScenarioStore = defineStore({ id: "ScenarioStore",
             const listEquipmentTypesLocales: EquipmentTypeLocale[] = []
             const locale = useGameParametersStore().language;
             for(const equipmentType of listEquipmentTypes ) {
-                for(const name of equipmentType.names) {
-                    if(name.lang === locale) {
-                        listEquipmentTypesLocales.push({
-                            id: equipmentType.id,
-                            name: name.name,
-                            icon_name: equipmentType.icon_name,
-                            color: equipmentType.color,
-                            isBattery: equipmentType.isBattery,
-                            isCharging: equipmentType.isCharging,
-                            equipmentTypeDurationParams: equipmentType.equipmentTypeDurationParams
-                        } as EquipmentTypeLocale); 
-                    }
-                }
-                listEquipmentTypesLocales.push({name: equipmentType.names[0].name, icon_name: equipmentType.icon_name, color: equipmentType.color, id: equipmentType.id} as EquipmentTypeLocale); 
+                listEquipmentTypesLocales.push({
+                    id: equipmentType.id,
+                    name: convertI18nObjectToLocale(equipmentType.names, locale),
+                    icon_name: equipmentType.icon_name,
+                    color: equipmentType.color,
+                    isBattery: equipmentType.isBattery,
+                    isCharging: equipmentType.isCharging,
+                    equipmentTypeDurationParams: equipmentType.equipmentTypeDurationParams
+                } as EquipmentTypeLocale); 
             }
             return listEquipmentTypesLocales;
         },
         //Not sure if it is really best practice
         convertNameToNameLocale(scenario: Scenario) {
             const locale = useGameParametersStore().language;
-            for(const name of scenario.names) {
-                if(name.lang === locale) {
-                    return name.text;
-                }
-            }
-            return scenario.names[0].text;
+            return convertI18nObjectToLocale(scenario.names, locale);
         },
         convertDayToDayLocale(scenario: Scenario) {
             const locale = useGameParametersStore().language;
-            for(const day of scenario.days) {
-                if(day.lang === locale) {
-                    return day.text;
-                }
-            }
-            return scenario.days[0].text;
+            return convertI18nObjectToLocale(scenario.days, locale);
         },
         convertDescriptionToDescriptionLocale(scenario: Scenario){
             const locale = useGameParametersStore().language;
-            for(const description of scenario.descriptions) {
-                if(description.lang === locale) {
-                    return description.text;
-                }
-            }
-            return scenario.descriptions[0].text;
+            return convertI18nObjectToLocale(scenario.descriptions, locale);
         },
         convertScenarioToScenarioLocale(scenario: Scenario) {
             const listEquipmentLocale: EquipmentTypeLocale[] = this.getListOfEquipmentTypeLocale(scenario.equipment_types); 
@@ -86,7 +67,9 @@ export const useScenarioStore = defineStore({ id: "ScenarioStore",
                                                     description: description,
                                                     equipment_type_local: listEquipmentLocale,
                                                     initial_consumption: scenario.initial_consumption,
-                                                    energyStorageParameters: scenario.energyStorageParameters
+                                                    energyStorageParameters: scenario.energyStorageParameters,
+                                                    energyMarketParameters: scenario.energyMarketParameters,
+                                                    moneyParameters: scenario.moneyParameters
                                                 }; 
             return scenarioLocale;
         },
@@ -118,6 +101,11 @@ export const useScenarioStore = defineStore({ id: "ScenarioStore",
         },
         getClickedScenario: state => () => state.clickedScenario,
         getRandomLocaleScenario: state => () => state.scenariosLocale[Math.floor(Math.random() * state.scenariosLocale.length)],
-
+        getInitialConsumptionCopy: state => () => {
+            if(state.clickedScenario){
+                return JSON.parse(JSON.stringify(state.clickedScenario.initial_consumption));
+            }
+            return [];
+        }
     },
 });

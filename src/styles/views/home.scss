@@ -1,7 +1,11 @@
 @import '../utilities/mixins.scss';
 
 #home-page{
+  @include for-desktop-up{
+    flex-direction: row;
+  }
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   .section{
@@ -12,6 +16,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: var(--theme-color-tertiary);
+    color: var(--theme-color-text);
+    margin: 1rem 0.5rem;
   }
   .section-title{
     font-size: 2.5em;
@@ -36,80 +43,7 @@
     }
   }
   .home-create-game{
-    background-color: var(--theme-color-tertiary);
-    color: var(--theme-color-text);
-    .multiplayer-toggle{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1em;
-      font-size: 1.2rem;
-      font-weight: bold;
-      .singlePlayer-label{
-        margin-right: 1em;
-        color: var(--theme-color-text);
-      }
-      .multiplayer-label{
-        margin-left: 1em;
-        color: var(--theme-color-text);
-      }
-    }
-    .multiplayer-privacy{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1em;
-      font-size: 1.2rem;
-      font-weight: bold;
-      .private-label{
-        margin-right: 1em;
-        color: var(--theme-color-text);
-      }
-      .public-label{
-        margin-left: 1em;
-        color: var(--theme-color-text);
-      }
-    }
-    .toggle{
-      background-color: var(--theme-color-background-secondary);
-      border-radius: 25px;
-      cursor: pointer;
-      width: 5rem;
-      height: 2rem;
-      .toggle-checkbox{
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-      }
-      .slider{
-        position: relative;
-        top: 0.1rem;
-        left: 0.1rem;
-        width: 2.5rem;
-        height: 1.5rem;
-        background-color: var(--theme-color-background);
-        border-radius: 25px;
-        transition: 0.4s;
-        &:before{
-          position: absolute;
-          content: "";
-          height: 1.8rem;
-          width: 1.8rem;
-          background-color: var(--theme-color-background);
-          transition: 0.4s;
-          border-radius: 50%;
-        }
-      }
-    }
-    .checked{
-      background-color: var(--theme-color-primary);
-      .slider{
-        &:before{
-          transform: translateX(3rem);
-        }
-      }
-    }
+    margin-right: 1rem;
     .multiplayer-gameId{
       display: flex;
       align-items: center;
@@ -126,6 +60,30 @@
         font-size: 1.5rem;
         font-weight: bold;
 
+      }
+    }
+  }
+  .home-join-game{
+    .input-container{
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--theme-color-text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      .label{
+        margin-right: 0.5rem;
+      }
+      .input{
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+        text-align: center;
+        width: 8rem;
+        border: none;
+        border-radius: 1rem;
+        &:focus{
+          outline: none;
+        }
       }
     }
   }

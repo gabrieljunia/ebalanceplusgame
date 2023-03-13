@@ -5,32 +5,31 @@ import { ScenarioLocale } from '../types/Scenario';
 import { ProductionCurve } from '../types/Production';
 import { errorScenarioLocale } from '../assets/entityErrorScenario';
 import { generateStringId } from '../helpers/idGenerator';
+import { Player } from '../types/Multiplayer';
+import { errorProductionCurve } from '../assets/entityErrorProduction';
 
 export const useGameParametersStore = defineStore({
     id: 'GameParametersStore',
     state: () => {
         return {
+            isGameStarted: false,
             gameId: '00000',
             date: new Date(),
             language: 'en',
             languageIsUserSet: false,
             theme: 'light',
             scenario: errorScenarioLocale as ScenarioLocale,
-            productionCurve: {
-                id: '0',
-                name: 'No production curve',
-                svg: '',
-                description: '', 
-                solar: [],
-                wind: [],
-                hydro: [],
-                total: []
-            } as ProductionCurve,
+            productionCurve: errorProductionCurve as ProductionCurve,
             isMultiplayer: false,
             isPublic: false,
-            user: '',
-            score: 0,
-            moneyWon: 0,
+            user: {
+                id: 'e_balance_plus_game_player_' + generateStringId(),
+                name: 'Anonymous_player_' + generateStringId(),
+                score: 0,
+                moneyWon: 0,
+                isConnected: false,
+                isHost: false
+            } as Player,
             availableMoney: 0,
             showedInfoOverlay: true
         };
@@ -41,16 +40,7 @@ export const useGameParametersStore = defineStore({
             if(productionCurveImport){
                 this.productionCurve = productionCurveImport;
             } else{
-                this.productionCurve = {
-                    id: '0',
-                    name: 'No production curve',
-                    svg: '',
-                    description: '',
-                    solar: [],
-                    wind: [],
-                    hydro: [],
-                    total: []
-                };
+                this.productionCurve = errorProductionCurve;
             }
         },
         setScenario(scenarioId: string) {
@@ -117,7 +107,13 @@ export const useGameParametersStore = defineStore({
         getProductionCurve: (state) => state.productionCurve,
         getProductionCurveTotal: (state) => state.productionCurve.total,
         getGameIdUpper: (state) => state.gameId.toUpperCase(),
+        isGameMultiplayer: (state) => state.isMultiplayer,
         canWithdrawMoney: (state) => (amount: number) => state.availableMoney >= amount,
-        getScenarioEnergyStorageParameters: (state) => state.scenario.energyStorageParameters
+        getScenarioEnergyStorageParameters: (state) => state.scenario.energyStorageParameters,
+        getScenarioEnergyMarketParameters: (state) => state.scenario.energyMarketParameters,
+        getScenarioMoneyParameters: (state) => state.scenario.moneyParameters,
+        getUser: (state) => state.user,
+        getUserId: (state) => state.user.id,
+        isUserHost: (state) => state.user.isHost,
     }
 });

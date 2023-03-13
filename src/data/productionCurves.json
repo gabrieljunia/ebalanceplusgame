@@ -1,45 +1,45 @@
 {
     "0":{
-        "id": "0",
-        "name": "Production curve solar summer",
+        "id": "pc_solar_summer",
+        "names": [{"text":"Solar production summer","lang":"en"},{"text":"Production solaire été","lang":"fr"}],
         "svg": "/productionCurves/courbe_test_yes.svg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "descriptions": [{"text":"Typical production of a home solar panels installation during the summer in the north of France.","lang":"en"},{"text":"Production type d'une installation photovoltaïque individuelle en été, dans le nord de la France.","lang":"fr"}],
         "solar":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,8,11,15,40,65,90,115,133,152,169,188,226,264,302,340,537,734,931,1128,1259,1389,1520,1650,1762,1874,1985,2097,2164,2230,2297,2363,2378,2393,2407,2422,2425,2428,2430,2433,2420,2407,2394,2381,2324,2267,2210,2153,2046,1938,1831,1723,1596,1468,1341,1213,1065,917,768,620,502,384,265,147,117,86,56,25,19,13,6,0,0,0,0,0,0,0,0,0],
         "wind":[],
         "hydro":[]
     },
     "1":{
-        "id": "1",
-        "name": "Production curve wind turbine summer",
+        "id": "pc_wind_summer",
+        "names": [{"text":"Wind turbine production summer","lang":"en"},{"text":"Production éolienne été","lang":"fr"}],
         "svg" : "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "descriptions": [{"text":"Typical production of a home wind turbine installation during the summer in the north of France.","lang":"en"},{"text":"Production type d'une installation éolienne individuelle en été, dans le nord de la France.","lang":"fr"}],
         "solar":[],
         "wind":[1925,1925,1925,1925,1969,2013,2056,2100,2088,2075,2063,2050,2063,2075,2088,2100,2094,2088,2081,2075,2006,1938,1869,1800,1763,1725,1688,1650,1550,1450,1350,1250,1113,975,838,700,738,775,813,850,988,1125,1263,1400,1456,1513,1569,1625,1531,1438,1344,1250,1138,1025,913,800,769,738,706,675,720,763,806,850,838,825,813,800,850,900,950,1000,1113,1225,1338,1450,1488,1525,1563,1600,1650,1700,1750,1800,1850,1900,1950,2000,2025,2050,2075,2100,2106,2113,2119,2125],
         "hydro":[]
     },
     "2":{
-        "id": "2",
-        "name": "Production curve solar winter",
+        "id": "pc_solar_winter",
+        "names": [{"text":"Solar production winter","lang":"en"},{"text":"Production solaire hiver","lang":"fr"}],
         "svg": "/productionCurves/courbe_test_yes.svg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "descriptions": [{"text":"Typical production of a home solar panels installation during the winter in the north of France.","lang":"en"},{"text":"Production type d'une installation photovoltaïque individuelle en hiver, dans le nord de la France.","lang":"fr"}],
         "solar":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,11,17,22,48,73,98,124,146,168,191,213,227,241,254,268,306,343,381,419,417,414,412,410,352,294,236,178,173,169,164,159,138,116,95,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         "wind":[],
         "hydro":[]
     },
     "3":{
-        "id":"3",
-        "name": "Production curve wind turbine winter",
+        "id":"pc_wind_winter",
+        "names": [{"text":"Wind turbine production winter","lang":"en"},{"text":"Production éolienne hiver","lang":"fr"}],
         "svg": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "descriptions": [{"text":"Typical production of a home wind turbine installation during the winter in the north of France.","lang":"en"},{"text":"Production type d'une installation éolienne individuelle en hiver, dans le nord de la France.","lang":"fr"}],
         "solar":[],
         "wind":[2529,2529,2529,2529,2534,2539,2544,2549,2766,2983,3200,3417,3189,2961,2733,2505,2413,2321,2229,2137,2121,2105,2089,2073,2150,2227,2304,2381,2510,2639,2768,2897,2801,2705,2609,2513,2509,2505,2501,2497,2526,2555,2584,2613,2553,2493,2433,2373,2538,2703,2868,3033,2953,2873,2793,2713,2718,2723,2728,2733,2705,2677,2649,2621,2573,2525,2477,2429,2141,1853,1565,1277,1207,1137,1067,997,1014,1031,1048,1065,1086,1107,1128,1149,1133,1117,1101,1085,1146,1207,1268,1329,1209,1089,969,849],
         "hydro":[]
     },
     "4":{
-        "id":"4",
-        "name": "Production curve solar & wind turbine summer",
+        "id":"pc_solar_wind_summer",
+        "names": [{"text":"Combined solar and wind production summer","lang":"en"},{"text":"Production combinée solaire et éolienne été","lang":"fr"}],
         "svg": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "descriptions": [{"text":"Typical production of a home solar panels and wind turbine installation during the summer in the north of France.","lang":"en"},{"text":"Production type d'une installation photovoltaïque et éolienne individuelle en été, dans le nord de la France.","lang":"fr"}],
         "solar":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,8,11,15,40,65,90,115,133,152,169,188,226,264,302,340,537,734,931,1128,1259,1389,1520,1650,1762,1874,1985,2097,2164,2230,2297,2363,2378,2393,2407,2422,2425,2428,2430,2433,2420,2407,2394,2381,2324,2267,2210,2153,2046,1938,1831,1723,1596,1468,1341,1213,1065,917,768,620,502,384,265,147,117,86,56,25,19,13,6,0,0,0,0,0,0,0,0,0],
         "wind":[1925,1925,1925,1925,1969,2013,2056,2100,2088,2075,2063,2050,2063,2075,2088,2100,2094,2088,2081,2075,2006,1938,1869,1800,1763,1725,1688,1650,1550,1450,1350,1250,1113,975,838,700,738,775,813,850,988,1125,1263,1400,1456,1513,1569,1625,1531,1438,1344,1250,1138,1025,913,800,769,738,706,675,720,763,806,850,838,825,813,800,850,900,950,1000,1113,1225,1338,1450,1488,1525,1563,1600,1650,1700,1750,1800,1850,1900,1950,2000,2025,2050,2075,2100,2106,2113,2119,2125],
         "hydro":[]

@@ -1,0 +1,27 @@
+@import '../utilities/mixins.scss';
+
+.results-menu-confirmation{
+    @include overlay-popup-window-centered;
+    border-radius: 1rem;
+    .content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .title{
+            @include base-typography-title;
+            padding: 1rem;
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+            a{
+                text-decoration: none;
+            }
+            .btn{
+                margin: 0.5rem;
+                @include button-base-style;
+                @include button-main-color-style;
+            }
+        }
+    }
+}

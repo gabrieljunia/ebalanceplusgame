@@ -32,6 +32,7 @@
         data() {
             return {
                 energyStore: useEnergyStore(),
+                productionStore: useProductionStore(),
                 maxAmount: 0 as number,
                 type: this.$t("energy.useEnergy"),
                 energyConsumption: {
@@ -57,8 +58,7 @@
                             isConsumptionEditable: true,
                             step: 10,
                             minConsumption: 0,
-                            maxConsumption: 2000
-                            // TODO : change to dynamic max consumption : number of batteries * battery capacity
+                            maxConsumption: useEnergyStore().getMaxDischargeRate
                         },
                     } as Equipment,
                 } as Consumption
@@ -69,7 +69,6 @@
                 this.energyStore.clickedConsumeEnergy=false;
             },
             saveEnergyUse(save:{startIndex:number, endIndex:number,amount:number,price:number,startHour:string,endHour:string}) {
-                console.log(this.energyStore.canUserUseEnergyAmountOverPeriod(save.startIndex, save.endIndex, save.amount))
                 if(this.energyStore.canUserUseEnergyAmountOverPeriod(save.startIndex, save.endIndex, save.amount) == false) {
                     alert("You can't use more energy than you have stored");
                 } else {
@@ -79,6 +78,7 @@
                     this.energyConsumption.amount = save.amount;
                     this.energyConsumption.price = save.price;
                     this.energyStore.consumeEnergy(this.energyConsumption);
+                    this.productionStore.addToAddedProductionList(this.energyConsumption);
                 }
             },
             amountError() {

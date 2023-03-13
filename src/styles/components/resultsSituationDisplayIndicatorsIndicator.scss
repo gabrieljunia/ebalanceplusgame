@@ -1,0 +1,59 @@
+@import '../utilities/mixins.scss';
+
+.indicator-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.8rem 0.5rem;
+    //width : 35rem;
+    .indicator-name{
+        @include base-typography;
+        font-size: medium;
+    }
+    .indicator-value-container{
+        display: flex;
+        align-items: center;
+        .indicator-value{
+            @include base-typography;
+            font-size: medium;
+            margin-left: 1rem;
+        }
+        .indicator-value-comparison{
+            @include base-typography;
+            font-size: medium;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .indicator-unit-switch{
+            margin-left: 1rem;
+            .indicator-unit-switch-container{
+                .indicator-unit-switch-button{
+                    width: 3.5rem;
+                    padding: 0.2rem 0.4rem;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    transition: 0.2s;
+                    border: 2px solid var(--theme-color-primary);
+                    &:hover{
+                        background-color: var(--theme-color-primary);
+                        color: var(--theme-color-text-secondary);
+                    }
+                }
+                .indicator-unit-switch-button-active{
+                    background-color: var(--theme-color-primary);
+                        color: var(--theme-color-text-secondary);
+                    cursor: default;
+                }
+                .start{
+                    border-top-left-radius: 0.5rem;
+                    border-bottom-left-radius: 0.5rem;
+                }
+                .end{
+                    border-top-right-radius: 0.5rem;
+                    border-bottom-right-radius: 0.5rem;
+                }
+            }
+        }
+    }
+}

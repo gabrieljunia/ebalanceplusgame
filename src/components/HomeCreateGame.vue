@@ -1,7 +1,3 @@
-<script	setup lang="ts">
-import { useGameParametersStore } from '../stores/GameParametersStore';
-</script>
-
 <template>
     <section class="home-create-game section">
         <div class="section-title">
@@ -11,49 +7,56 @@ import { useGameParametersStore } from '../stores/GameParametersStore';
             {{ $t("home.createGameDescription") }}
         </p>
         <div class="multiplayer-toggle">
-            <p class="singlePlayer-label">{{ $t("home.singlePlayer") }}</p>
-            <label class="toggle" :class="multiPlayer ? 'checked':''">
-                <input class="toggle-checkbox" type="checkbox" v-model="multiPlayer">
-                <span class="slider"></span>
-            </label>
-            <p class="multiplayer-label">{{ $t("home.multiPlayer") }}</p>
+            <BaseToggleSwitch
+                :is-checked-prop="multiPlayer"
+                start-label-key="home.singlePlayer"
+                end-label-key="home.multiPlayer"
+                @change="multiPlayer = $event"/>
         </div>
         <div class="multiplayer-gameId" v-if="multiPlayer">
             <p class="gameId-label">{{ $t("home.gameCode") }} :</p>
             <p class="gameId-display">{{ gameParametersStore.getGameIdUpper }}</p>
         </div>
         <div class="multiplayer-privacy" v-if="multiPlayer">
-            <p class="private-label">{{ $t("home.private") }}</p>
-            <label class="toggle" :class="public ? 'checked':''">
-                <input class="toggle-checkbox" type="checkbox" v-model="public">
-                <span class="slider"></span>
-            </label>
-            <p class="public-label">{{ $t("home.public") }}</p>
+            <BaseToggleSwitch
+                :is-checked-prop="public"
+                start-label-key="home.private"
+                end-label-key="home.public"
+                @change="public = $event"/>
         </div>
         <div class="btn-container">
             <button class="btn create-game-btn" @click="createGame">
-                <Router-Link to="/setup">
-                    {{ $t("button.create") }}
-                </Router-Link>
+                {{ $t("button.create") }}
             </button>
         </div>
     </section>
 </template>
 
 <script lang="ts">
-const gameParametersStore = useGameParametersStore();
+import router from '../modules/router';
+import BaseToggleSwitch from './BaseToggleSwitch.vue';
+
     export default {
-        name: "HomeCreateGame",
-        data() {
-            return {
-                multiPlayer: false,
-                public: false
-            };
-        },
-        methods: {
-            createGame() {
-                gameParametersStore.createGame(this.multiPlayer, this.public);
+    name: "HomeCreateGame",
+    data() {
+        return {
+            gameParametersStore: useGameParametersStore(),
+            multiplayerStore: useMultiplayerStore(),
+            multiPlayer: false,
+            public: false
+        };
+    },
+    methods: {
+        createGame() {
+            this.gameParametersStore.createGame(this.multiPlayer, this.public);
+            if(this.multiPlayer){
+                this.multiplayerStore.createConnection();
+                this.multiplayerStore.createGame(this.gameParametersStore.gameId) ? router.push("/setup") : alert(this.$t("home.unSuccessfulGameCreation"));
+            } else {
+                router.push("/setup");
             }
         }
-    }
+    },
+    components: { BaseToggleSwitch }
+}
 </script>

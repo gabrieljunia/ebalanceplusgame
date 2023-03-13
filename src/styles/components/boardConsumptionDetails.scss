@@ -1,16 +1,41 @@
 #board-consumption-details{
-    .card{
-        .card-choice-buttons{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    .tab-container{
+        margin-left: 0.5rem;
+        display: flex;
+        .tab{
+            padding: 0.2rem 0.5rem;
             display: flex;
-            justify-content: center;
-            .btn-modify{
-                margin-right: 10px;
+            align-items: center;
+            cursor: pointer;
+            background-color: var(--theme-color-background-secondary);
+            .tab-icon{
+                width: 20px;
+                height: 20px;
+                margin-right: 0.3rem;
             }
-            .btn-delete{
-                margin-left: 10px;
-                background-color: red;
-                color: white;
+            .tac-text{
+                font-size: 0.8rem;
             }
         }
+        .active-tab{
+            background-color: var(--theme-color-background);
+        }
+        .tab-left{
+            border-top-left-radius: 0.5rem;
+        }
+        .tab-right{
+            border-top-right-radius: 0.5rem;
+        }
+    }
+    .popup-window{
+        position: relative;
+        top:auto;
+        left:auto;
+        transform: none;
     }
 }

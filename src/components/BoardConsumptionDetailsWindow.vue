@@ -1,7 +1,4 @@
 <script setup lang="ts">
-    import { useBoardStore } from '../stores/BoardStore';
-    import { useEnergyStore } from '../stores/EnergyStore';
-    import { useEquipmentStore } from '../stores/EquipmentStore';
     import CardPopup from './CardPopup.vue';
 </script>
 
@@ -23,13 +20,7 @@
         @time-error="timeError"/>
 </template>
 
-<style lang="scss">
-    @import '../styles/components/boardConsumptionDetails.scss';
-</style>
-
 <script lang="ts">
-    const boardStore = useBoardStore();
-    const equipmentStore = useEquipmentStore();
     export default {
         name: 'BoardConsumptionDetailsWindow',
         props: {
@@ -41,30 +32,50 @@
         data() {
             return {
                 energyStore: useEnergyStore(),
+                boardStore: useBoardStore(),
+                equipmentStore: useEquipmentStore(),
                 consumptionType: '' as string,
-                maxConsumptionAmount: 0 as number
+                maxConsumptionAmount: 0 as number,
+                originalConsumptionAmount: ref(this.consumption.amount),
+                originalIndexes: ref({start: this.consumption.startIndex, end: this.consumption.endIndex})
             };
         },
         methods: {
             closeDetails() {
-                boardStore.setClickedTile(null);
+                this.boardStore.setClickedTileToEmpty();
+                this.boardStore.setClickedProductionTileToEmpty();
             },
             saveModifiedConsumption(save:{startIndex:number, endIndex:number,amount:number,price:number,startHour:string,endHour:string}) {
-                this.consumption.amount = save.amount;
-                this.consumption.price = save.price;
-                this.consumption.startIndex = save.startIndex;
-                this.consumption.endIndex = save.endIndex;
-                boardStore.modifyClickedTileConsumptionHours(save.startHour, save.endHour);
+                if(this.consumption.equipment.type.isBattery){
+                    if(this.consumption.equipment.type.isCharging) {
+                        this.boardStore.modifyClickedTileConsumptionHours(save.startHour, save.endHour);
+                        this.consumption.amount = this.originalConsumptionAmount;
+                        this.consumption.startIndex = this.originalIndexes.start;
+                        this.consumption.endIndex = this.originalIndexes.end;
+                        this.energyStore.modifyStoredEnergy(this.consumption, save.startIndex, save.endIndex, save.amount);
+                    } else {
+                        this.boardStore.modifyClickedProductionTile(save.startHour, save.endHour, save.amount);
+                        this.consumption.amount = this.originalConsumptionAmount;
+                        this.consumption.startIndex = this.originalIndexes.start;
+                        this.consumption.endIndex = this.originalIndexes.end;
+                        this.energyStore.modifyUsedEnergy(this.consumption, save.startIndex, save.endIndex, save.amount);
+                    }
+                } else {
+                    this.boardStore.modifyClickedTileConsumptionHours(save.startHour, save.endHour);
+                }
             },
             deleteConsumption() {
-                if(this.consumption.equipment.type.isBattery && this.consumption.equipment.battery.isCharging) {
+                if(this.consumption.equipment.type.isBattery && this.consumption.equipment.type.isCharging) {
                     if(this.energyStore.canUserRemoveEnergyFromAvailableStoredEnergyList(this.consumption)) {
-                        boardStore.deleteClickedTileConsumption();
+                        this.boardStore.deleteClickedTileConsumption();
                     } else {
                         alert(this.$t('energy.cannotRemoveStoredEnergyUsed'));
                     }
+                } else if(this.consumption.equipment.type.isBattery && !this.consumption.equipment.type.isCharging){
+                    this.boardStore.deleteClickedProductionTileConsumption();
+                    this.energyStore.removeUsedEnergy(this.consumption);
                 } else {
-                    boardStore.deleteClickedTileConsumption();
+                    this.boardStore.deleteClickedTileConsumption();
                 }
             },
             amountError() {
@@ -77,7 +88,7 @@
         watch: {
             consumption: {
                 handler() {
-                    this.consumptionType = equipmentStore.convertEquipmentToEquipmentLocale(this.consumption.equipment).type.name;
+                    this.consumptionType = this.equipmentStore.convertEquipmentToEquipmentLocale(this.consumption.equipment).type.name;
                 },
                 immediate: true
             }

@@ -8,6 +8,7 @@
     import CardPopupTimeModifier from './CardPopupTimeModifier.vue';
     import CardPopupAmountModifier from './CardPopupAmountModifier.vue';
     import CardPopupModificationButtons from './CardPopupModificationButtons.vue';
+    import { convertTimesToIndexes, convertIndexesToTimes, checkTimeInput } from '../helpers/time';
 </script>
 
 <template>
@@ -165,13 +166,30 @@
             },
             updateMaxEnergyAmount() {
                 if(this.equipment.type.isBattery && this.equipment.type.isCharging) {
-                    this.energyStore.updateValues();
-                    this.maxEnergyAmount = this.energyStore.getMaximumEnergyStorageWithoutConsumption(this.id)/((this.endIndex-this.startIndex)+1);
+                    this.updateMaxEnergyAmountBatteryCharge();
                 } else if(this.equipment.type.isBattery && !this.equipment.type.isCharging) {
-                    this.maxEnergyAmount = this.energyStore.getMaxAmountOfEnergyUserCanUseOverPeriod(this.startIndex, this.endIndex)/((this.endIndex-this.startIndex)+1);
+                    this.updateMaxEnergyAmountBatteryDischarge();
                 } else {
                     this.maxEnergyAmount = this.equipment.equipmentConsumptionParams.maxConsumption;
                 }
+            },
+            updateMaxEnergyAmountBatteryCharge() {
+                this.energyStore.updateValues();
+                let maxEnergyStorage = 0;
+                maxEnergyStorage = this.energyStore.getMaximumEnergyStorageWithoutConsumption(this.id)/((this.endIndex-this.startIndex)+1);
+                const maxChargeRate = this.equipment.equipmentConsumptionParams.maxConsumption;
+                this.maxEnergyAmount = maxEnergyStorage < maxChargeRate ? maxEnergyStorage : maxChargeRate;
+            },
+            updateMaxEnergyAmountBatteryDischarge() {
+                this.energyStore.updateValues();
+                let maxUsableEnergy = 0;
+                if(this.propsIsInitialAddPopup){
+                    maxUsableEnergy = this.energyStore.getMaxAmountOfEnergyUserCanUseOverPeriod(this.startIndex, this.endIndex);
+                } else {
+                    maxUsableEnergy = this.energyStore.getMaxAmountOfEnergyUserCanUseOverPeriodWithoutConsumption(this.id, this.startIndex, this.endIndex);
+                }
+                const maxDischargeRate = this.equipment.equipmentConsumptionParams.maxConsumption;
+                this.maxEnergyAmount = maxUsableEnergy < maxDischargeRate ? maxUsableEnergy : maxDischargeRate;
             },
             updateStartHour(newStartHour: string) {
                 this.startHour=newStartHour;
@@ -184,12 +202,12 @@
                 this.updateMaxEnergyAmount();
             },
             setStartAndEndIndex() {
-                const indexes = this.consumptionStore.convertTimesToIndexes(this.startHour, this.endHour);
+                const indexes = convertTimesToIndexes(this.startHour, this.endHour);
                 this.startIndex = indexes.indexStart;
                 this.endIndex = indexes.indexEnd;
             },
             initializeStartAndEndHour() {
-                const hours = this.consumptionStore.convertIndexesToTimes(this.indexes.start, this.indexes.end);
+                const hours = convertIndexesToTimes(this.indexes.start, this.indexes.end);
                 this.startHour = hours.timeStart;
                 this.endHour = hours.timeEnd;
             },
@@ -201,7 +219,7 @@
                 }
             },
             saveConsumption() {
-                if(this.consumptionStore.checkTimeInput(this.startHour, this.endHour)){
+                if(checkTimeInput(this.startHour, this.endHour)){
                     this.inputError = false;
                     if (this.checkAmountIsUnderMax()) {
                         this.$emit('save', {   
@@ -251,10 +269,11 @@
             },
             indexes: {
                 handler: function (newIndexes) {
-                    this.startIndex = newIndexes.start;
-                    this.endIndex = newIndexes.end;
+                    this.startIndex = ref(newIndexes.start);
+                    this.endIndex = ref(newIndexes.end);
                     this.initializeStartAndEndHour();
                     this.setStartAndEndIndex();
+                    this.updateMaxEnergyAmount();
                 },
                 immediate: true
             },

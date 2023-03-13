@@ -11,7 +11,7 @@ const errorEquipmentTypeDurationParams = {
 
 export const errorEquipmentType = {
     id: 'error',
-    names: [{lang: 'en', name: 'Error'}],
+    names: [{lang: 'en', text: 'Error'}],
     icon_name: 'mdi:null',
     color: '#000000',
     isBattery: false,

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { emptyTile } from '../assets/entityEmptyTile';
 import { Consumption } from '../types/Consumption';
 import { Board, BoardVisualParams, Tile, TileParams } from '../types/Board';
 import { convertValueToPixels, convertValuesListToPixelsList } from '../helpers/drawInPixels';
@@ -25,7 +26,9 @@ export const useBoardStore = defineStore({
                 pxSizeFor10W: 5,
                 pxSizeFor15min: 15,
             } as TileParams,
-            clickedTile: null as Tile | null
+            clickedTile: emptyTile as Tile,
+            clickedProductionTile: emptyTile as Tile,
+            isTileClicked: false,
         };
     },
     actions: {
@@ -117,20 +120,60 @@ export const useBoardStore = defineStore({
             this.board.consumptionTiles = this.board.consumptionTiles.filter(tile => tile.id !== tileId);
         },
         setClickedTile(tile: Tile | null) {
-            this.clickedTile = tile;
+            if(tile){
+                this.clickedTile = tile;
+            } else {
+                this.clickedTile = emptyTile;
+            }
+            this.setIsTileClicked();
+        },
+        setClickedProductionTile(tile: Tile | null) {
+            if(tile){
+                this.clickedProductionTile = tile;
+            } else {
+                this.clickedProductionTile = emptyTile;
+            }
+            this.setIsTileClicked();
         },
         deleteClickedTileConsumption() {
             if(this.clickedTile) {
                 useConsumptionStore().removeFromConsumptionList(this.clickedTile.id);
             }
-            this.clickedTile = null;
+            this.setClickedTileToEmpty();
+        },
+        deleteClickedProductionTileConsumption() {
+            if(this.clickedProductionTile) {
+                useProductionStore().removeFromAddedProductionList(this.clickedProductionTile.id);
+            }
+            this.setClickedProductionTileToEmpty();
         },
         modifyClickedTileConsumptionHours(startHour: string, endHour: string) {
             if(this.clickedTile) {
                 useConsumptionStore().modifyConsumptionHours(this.clickedTile.id, startHour, endHour);
             }
-            this.clickedTile = null;
-        }, 
+            this.setClickedTileToEmpty();
+        },
+        modifyClickedProductionTile(startHour: string, endHour:string, amount: number) {
+            if(this.clickedProductionTile) {
+                useProductionStore().modifyAddedProduction(this.clickedProductionTile.id, startHour, endHour, amount);
+            }
+            this.setClickedProductionTileToEmpty();
+        },
+        setClickedTileToEmpty() {
+            this.clickedTile = emptyTile;
+            this.setIsTileClicked();
+        },
+        setClickedProductionTileToEmpty() {
+            this.clickedProductionTile = emptyTile;
+            this.setIsTileClicked();
+        },
+        setIsTileClicked(){
+            if (this.clickedTile.id !== emptyTile.id || this.clickedProductionTile.id !== emptyTile.id) {
+                this.isTileClicked = true;
+            } else {
+                this.isTileClicked = false;
+            }
+        }
     },
     getters: {
         getProductionCurveInPixels(state) {

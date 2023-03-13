@@ -8,6 +8,7 @@
     },
     "button":{
         "cancel": "Cancel",
+        "confirm": "Confirm",
         "delete": "Delete",
         "edit": "Edit",
         "save": "Save",
@@ -26,7 +27,9 @@
         "purchase": "Purchase",
         "sale": "Sale",
         "total": "Total",
-        "close": "Close"
+        "close": "Close",
+        "yes": "Yes",
+        "no": "No"
     },
     "input":{
         "start": "Start",
@@ -46,7 +49,8 @@
         "amountErrorHigherThanEnergyStored": "The total amount must be lower than the energy stored"
     },
     "money":{
-        "cost": "Cost"
+        "cost": "Cost",
+        "personnalMoney": "Balance"
     },
     "energy":{
         "header": "Energy storage",
@@ -62,14 +66,17 @@
         "createGame": "Create a game",
         "joinGame": "Join a game",
         "createGameDescription": "Create a new game and choose your scenario and production curve. The goal is to manage your energy consumption to keep it under your production curve. You can also buy and sell energy to the market. Multiplayer is also available, just note down the game ID bellow and share it with your friends.",
-        "joinGameDescription": "Join a game by entering the game ID. You can also join a game by clicking on the link sent by your friend.",
+        "joinGameDescription": "Join a game by entering the game ID. In the same principle as the single player game, you will have to manage your energy consumption to keep it under your production curve. While you can still buy and sell energy to the market, you are encouraged to trade with other players and experiment the principle of an energy community.",
         "publicGames": "Public games",
         "noPublicGames": "No public games available",
         "gameCode": "Game ID",
         "singlePlayer": "Single player",
         "multiPlayer": "Multiplayer",
         "public": "Public",
-        "private": "Private"
+        "private": "Private",
+        "unSuccessfulGameCreation": "Failed tp create new multiplayer game",
+        "unSuccessfulGameJoin": "Failed to join game",
+        "invalidGameCode": "Invalid game ID"
     },
     "setup":{
         "launchNewGame": "Launch a new game",
@@ -89,5 +96,36 @@
         "marketUsage":"You can also buy or sell energy according to your needs. By clicking on the 'market' icon. Here you will find the money you have as well as the possibility of buying or selling energy. When you click on the 'sell'  button you will have access to the sale window. The sale of energy works like a classic consumption. You must place this consumption on the board at the desired time. The sale will earn you money to buy new equipment or batteries. By clicking on the buy button you can buy energy at a certain price depending on the time of purchase. [ENERGY PURCHASE LOGIC]",
         "howToWin": "How to win?",
         "winRule":"The goal is to have the best final score, which corresponds to the best possible flexibility. For this, your consumption must exceed production as little as possible. As well as selling the extra energy."
+    },
+    "results": {
+        "confirmSeeResults": "Do you want to see the results ?",
+        "situations": {
+            "initialSituation": {
+                "name": "Initial situation",
+                "description": "This is the initial situation of the game. The numbers form a baseline you were tasked to improve."
+            },
+            "finalSituation": {
+                "name": "Final situation",
+                "description": "This is the final situation of the game. It represents in a few numbers the result of your actions, allowing you to compare your performance to the baseline."
+            }
+        },
+        "performanceIndicators":{
+            "totalConsumption": "Total consumption",
+            "totalProduction": "Total production",
+            "totalOverConsumption": "Total over-consumption",
+            "totalSoldEnergy": "Total sold energy",
+            "totalBoughtEnergy": "Total bought energy",
+            "totalStoredEnergy": "Total stored energy",
+            "totalUsedStoredEnergy": "Total used stored energy",
+            "ratios":{
+                "selfConsumptionRatio": "Self-consumption ratio",
+                "selfProductionRatio": "Self-production ratio"
+            }
+        },
+        "sections":{
+            "consumption": "Consumption",
+            "production": "Production",
+            "ratios": "Ratios"
+        }
     }
 }

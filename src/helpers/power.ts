@@ -1,8 +1,11 @@
-function roundNumberToTwoDecimals(amount: number): number {
+export function roundNumberToTwoDecimals(amount: number): number {
     return Math.round(amount * 100) / 100;
 }
 
 function convertWattsToKilowatts(watts: number): number {
+    if(watts === 0) {
+        return 0;
+    }
     return watts / 1000;
 }
 
@@ -14,7 +17,17 @@ export function calculateTotalWattsPer15min(wattsPer15min: number, indexes:{inde
     return wattsPer15min * ((indexes.indexEnd - indexes.indexStart)+1);
 }
 
+export function convertWattsPer15minToWattsPerHour(watts: number): number {
+    if(watts === 0) {
+        return 0;
+    }
+    return roundNumberToTwoDecimals(watts / 4);
+}
+
 export function convertWattsPer15minToKilowattsPerHour(watts: number): number {
+    if(watts === 0) {
+        return 0;
+    }
     return roundNumberToTwoDecimals(convertWattsToKilowatts(watts) / 4);
 }
 

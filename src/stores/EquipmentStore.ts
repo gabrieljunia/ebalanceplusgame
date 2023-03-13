@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { errorEquipment } from '../assets/entityErrorEquipment';
+import { convertI18nObjectToLocale } from '../helpers/translation';
 import { Equipment, EquipmentLocale } from '../types/Equipment';
 import { EquipmentType, EquipmentTypeLocale } from '../types/EquipmentType';
 
@@ -19,21 +20,9 @@ export const useEquipmentStore = defineStore({id :'EquipmentStore',
             this.clickedEquipment = equipment;
         },
         getEquipmentTypeLocale(type: EquipmentType, locale:string){
-            for(const name of type.names) {
-                if(name.lang === locale){
-                    return {
-                        id: type.id,
-                        name: name.name,
-                        icon_name: type.icon_name,
-                        color: type.color,
-                        isBattery: type.isBattery,
-                        equipmentTypeDurationParams: type.equipmentTypeDurationParams
-                    } as EquipmentTypeLocale;
-                }
-            }
             return {
                 id: type.id,
-                name: type.names[0].name,
+                name: convertI18nObjectToLocale(type.names, locale),
                 icon_name: type.icon_name,
                 color: type.color,
                 isBattery: type.isBattery,

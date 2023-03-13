@@ -1,8 +1,10 @@
+import { I18nObject } from "./I18nObject";
+
 export interface ProductionCurve {
     id : string;
-    name: string;
+    names: I18nObject[];
+    descriptions: I18nObject[];
     svg: string;
-    description: string,
     solar: number[];
     wind: number[];
     hydro: number[];

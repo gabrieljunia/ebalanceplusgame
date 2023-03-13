@@ -1,50 +1,15 @@
-<script lang="ts">
+<script setup lang="ts">
     import { useProductionStore } from '../stores/ProductionStore';
     import { ProductionCurve } from '../types/Production';
     import { Icon } from '@iconify/vue';
-
-
-    const productionStore = useProductionStore();
-    export default {
-
-        setup() {
-            const productionStore = useProductionStore();
-            productionStore.fetchProductionCurves();
-            productionStore.setClickedProductionCurveToFirstCurve();
-            return {productionStore};
-        },
-        computed: {
-            getList: productionStore.getAllProductionCurves
-        },
-        data() {
-            return {
-            }
-        },
-        methods: {
-            isClicked(productionCurve: ProductionCurve ) {
-                productionStore.setClickedProductionCurve(productionCurve);
-            },
-
-            isEmpty(listProd: number[]) {
-                let empty: boolean;
-                if(listProd.length == 0)
-                    empty = true;
-                else
-                    empty = false 
-                return empty
-            }
-        },
-        components: {
-            Icon
-        }
-    };
+import { convertI18nObjectToLocale } from '../helpers/translation';
 </script>
 
 <template>
     <section class="list-container">
-        <div class="boucle" v-for="curve in getList" @click="isClicked(curve)">
+        <div class="boucle" v-for="curve in productionCurves" @click="isClicked(curve)">
             <div class="box-container">
-                <h1>{{ curve.name }}</h1>
+                <h1>{{ convertI18nObjectToLocale(curve.names,gameParametersStore.language) }}</h1>
                 <div class="svg-container">
                     <img :src="curve.svg" alt="curve">
                 </div>
@@ -68,3 +33,36 @@
 <style scoped lang="scss">
     @import "../styles/components/setupProductionAndScenarioList.scss";
 </style>
+
+<script lang="ts">
+    export default {
+        name: "SetupProductionList",
+        data() {
+            return {
+                productionStore : useProductionStore(),
+                gameParametersStore: useGameParametersStore()
+            }
+        },
+        computed : {
+            productionCurves() {
+                return this.productionStore.productionCurves.values();
+            }
+        },
+        methods: {
+            isClicked(productionCurve: ProductionCurve ) {
+                this.productionStore.setClickedProductionCurve(productionCurve);
+            },
+            isEmpty(listProd: number[]) {
+                let empty: boolean;
+                if(listProd.length == 0)
+                    empty = true;
+                else
+                    empty = false 
+                return empty
+            }
+        },
+        components: {
+            Icon
+        }
+    };
+</script>

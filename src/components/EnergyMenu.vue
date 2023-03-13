@@ -1,9 +1,5 @@
-<script setup lang="ts">
-import { useEnergyStore } from '../stores/EnergyStore';
-</script>
-
 <template>
-    <section id="menu">
+    <section id="menu"  v-if="energyStore.displayEnergyMenu">
         <div class="menu-header">
             <span class="stored-percentage" :style="{'color' : energyStore.getEnergyIconColor}">
                 {{ energyStore.getEnergyStoragePercentage }} %
@@ -78,8 +74,12 @@ import { useEnergyStore } from '../stores/EnergyStore';
 </style>
 
 <script lang="ts">
-    const energyStore = useEnergyStore();
     export default {
-        name: "EnergyMenu"
+        name: "EnergyMenu",
+        data() {
+            return {
+                energyStore: useEnergyStore()
+            }
+        }
     }
 </script>

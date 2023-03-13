@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { useProductionStore } from '../src/stores/ProductionStore';
-import { useGameParametersStore } from '../src/stores/GameParametersStore';
-import TheNavBar from './layout/TheNavBar.vue';
-const productionStore = useProductionStore();
-productionStore.fetchProductionCurves();
+  import { useGameParametersStore } from '../src/stores/GameParametersStore';
+  import TheNavBar from './layout/TheNavBar.vue';
 </script>
 
 <template>

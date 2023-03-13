@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { convertTimesToIndexes } from '../helpers/time';
 import { Consumption } from '../types/Consumption';
 import { ProductionCurve } from '../types/Production';
 
@@ -56,13 +57,25 @@ export const useProductionStore = defineStore({
                 useBoardStore().setTilesFromProductionList();
             }
         },
+        modifyAddedProduction(addedProductionId: string,startHour: string, endHour: string, amount: number) {
+            const addedProductionToModify = this.addedProductionList.find(addedProduction => addedProduction.id === addedProductionId);
+            if (addedProductionToModify) {
+                const indexes = convertTimesToIndexes(startHour, endHour);
+                this.removeAddedProductionFromTotalProduction(addedProductionToModify);
+                addedProductionToModify.startIndex = indexes.indexStart;
+                addedProductionToModify.endIndex = indexes.indexEnd;
+                addedProductionToModify.amount = amount;
+                this.addAddedProductionToTotalProduction(addedProductionToModify);
+                useBoardStore().setTilesFromProductionList();
+            }
+        },
         addAddedProductionToTotalProduction(addedProduction: Consumption) {
             for (let i=addedProduction.startIndex; i<=addedProduction.endIndex; i++) {
                 this.totalProduction[i] += addedProduction.amount;
             }
         },
         removeAddedProductionFromTotalProduction(addedProduction: Consumption) {
-            for (let i=addedProduction.startIndex; i<addedProduction.endIndex; i++) {
+            for (let i=addedProduction.startIndex; i<=addedProduction.endIndex; i++) {
                 this.totalProduction[i] -= addedProduction.amount;
             }
         },
@@ -71,7 +84,7 @@ export const useProductionStore = defineStore({
         getProductionCurveById: state => (id: string) => state.productionCurves.get(id),
         getProductionCurveByName: state => (name: string) => {
             for (const curve of state.productionCurves.values()) {
-                if (curve.name === name) {
+                if (curve.names.find(n => n.text === name)) {
                     return curve;
                 }
             }
@@ -81,7 +94,7 @@ export const useProductionStore = defineStore({
             for (const curve of state.productionCurves.values()) {
                 allProductionCurves.push(curve);
             }
-            return allProductionCurves;
+            return allProductionCurves as ProductionCurve[];
         },
         getClickedProductionCurve: state => () => state.clickedProductionCurve,
         getRandomProductionCurve: state => () => {
@@ -94,6 +107,10 @@ export const useProductionStore = defineStore({
         },
         getAddedProductionListSortedByStartIndex(state) {
             return state.addedProductionList.sort((a,b) => (a.startIndex > b.startIndex) ? 1 : -1);
-        }
+        },
+        getAddedProductionById: state => (id: string) => state.addedProductionList.find(addedProduction => addedProduction.id === id),
+        getTotalProductionCopy: state => () => {
+            return JSON.parse(JSON.stringify(state.totalProduction));
+        },
     }
 });

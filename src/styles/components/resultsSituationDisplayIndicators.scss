@@ -1,0 +1,15 @@
+@import "../utilities/mixins.scss";
+
+.indicators{
+    .line{
+        height: 1px;
+        width: 100%;
+        background-color: var(--theme-color-text);
+    }
+    .indicators-section{
+        .indicators-section-title{
+            @include base-typography;
+            margin: 1rem 0;
+        }
+    }
+}

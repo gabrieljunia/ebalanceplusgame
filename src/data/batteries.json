@@ -3,8 +3,8 @@
     {
         "id":"battery_charge",
         "names":[
-            {"lang":"fr","name":"Stocker de l'énergie"},
-            {"lang":"en","name":"Store energy"}
+            {"lang":"fr","text":"Stocker de l'énergie"},
+            {"lang":"en","text":"Store energy"}
         ],
         "icon_name":"mdi:battery-charging-100",
         "color":"#29CC65",
@@ -22,8 +22,8 @@
     {
         "id":"battery_discharge",
         "names":[
-            {"lang":"fr","name":"Décharger de l'énergie"},
-            {"lang":"en","name":"Discharge energy"}
+            {"lang":"fr","text":"Décharger de l'énergie"},
+            {"lang":"en","text":"Discharge energy"}
         ],
         "icon_name":"mdi:battery-90",
         "color":"#FFBB00",

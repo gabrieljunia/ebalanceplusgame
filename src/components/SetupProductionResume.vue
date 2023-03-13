@@ -1,24 +1,13 @@
 <script setup lang="ts">
-    import { useProductionStore } from '../stores/ProductionStore';
     import { Icon } from '@iconify/vue'; 
-
-    const productionStore = useProductionStore();
-
-    function isEmpty(listProd: number[]){
-        let empty: boolean;
-        if(listProd.length == 0 )
-            empty = true;
-        else
-            empty = false 
-        return empty
-    }
+    import { convertI18nObjectToLocale } from '../helpers/translation';
 </script>
 
 <template>
     <div class="recap-container">
         <div class="card-content" v-if="productionStore.clickedProductionCurve">
             <h1 class="name">
-                {{productionStore.clickedProductionCurve.name}}
+                {{ convertI18nObjectToLocale(productionStore.clickedProductionCurve.names, gameParametersStore.language) }}
             </h1>
 
             <div class="svg-container">
@@ -37,7 +26,7 @@
                 </div>
             </div> 
             <div class="explanation-container">
-                <p>{{ productionStore.clickedProductionCurve.description }}</p>
+                <p>{{ convertI18nObjectToLocale(productionStore.clickedProductionCurve.descriptions, gameParametersStore.language) }}</p>
             </div>
         </div>
     </div>
@@ -47,3 +36,28 @@
 <style scoped lang="scss">
     @import "../styles/components/setupProductionAndScenarioResume.scss";
 </style>
+
+<script lang="ts">
+    export default {
+        name: "SetupProductionResume",
+        data() {
+            return {
+                productionStore: useProductionStore(),
+                gameParametersStore: useGameParametersStore(),
+            }
+        },
+        methods: {
+            isEmpty(listProd: number[]) {
+                let empty: boolean;
+                if(listProd.length == 0)
+                    empty = true;
+                else
+                    empty = false 
+                return empty
+            }
+        },
+        components: {
+            Icon
+        }
+    };
+</script>

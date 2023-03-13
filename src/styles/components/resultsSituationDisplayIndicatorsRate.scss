@@ -1,0 +1,21 @@
+@import '../utilities/mixins.scss';
+
+.ratio-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.7rem 0.5rem;
+    .ratio-name {
+        @include base-typography;
+        font-size: medium;
+        flex: 1;
+    }
+
+    .ratio-value {
+        flex: 1;
+        text-align: right;
+        @include base-typography;
+        font-size: medium;
+    }
+}

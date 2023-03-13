@@ -70,3 +70,42 @@ export function addTimeAmountToHour(hour: string, timeAmount: string) {
     }
     return getHourStringFromHourAndMinutesNumbers(newHourNumber, newMinutesNumber);
 }
+
+function convertTimeToIndex(hour: string): (number) {
+    let listHour: string[] = hour.split(":", 2);
+    let h:number = Number(listHour[0]);
+    let m:number = Number(listHour[1]);
+    let index:number = h*4+ m/15;
+    return index;
+}
+
+function convertIndexToTime(index:number) {
+    let h:number = Math.floor(index/4);
+    let m:number = (index%4)*15;
+    let time:string = h.toString().padStart(2, '0') + ":" + m.toString().padStart(2, '0');
+    return time;
+}
+
+export function convertIndexesToTimes(indexStart:number, indexEnd:number) {
+    let timeStart:string = convertIndexToTime(indexStart);
+    let timeEnd:string = convertIndexToTime(indexEnd+1);
+    return {timeStart:timeStart, timeEnd:timeEnd};
+}
+
+export function convertTimesToIndexes(timeStart:string, timeEnd:string) {
+    let indexStart:number = convertTimeToIndex(timeStart);
+    let indexEnd:number = convertTimeToIndex(timeEnd)-1;
+    return {indexStart:indexStart, indexEnd:indexEnd};
+}
+
+export function checkTimeInput(timeStart:string, timeEnd:string) {
+    if(timeStart === '' || timeEnd === ''){
+        return false;
+    }
+    let indexStart:number = convertTimeToIndex(timeStart);
+    let indexEnd:number = convertTimeToIndex(timeEnd)-1;
+    if(indexStart > indexEnd || indexStart < 0 || indexEnd > 95){
+        return false;
+    }
+    return true;
+}
